@@ -15,7 +15,7 @@ namespace Screenshare
         {
             TcpListener server = null;
 
-            server = new TcpListener(new IPEndPoint(TEST_ADDRESS, TEST_PORT));
+            server = new TcpListener(TEST_PORT);
             server.Start();
 
             while (true)

@@ -20,9 +20,15 @@ namespace Screenshare
             try
             {
                 var connection = new TcpClient();
-                connection.Connect(new IPEndPoint(IPAddress.Parse(TEST_ADDRESS), TEST_PORT));
-                StreamWriter writer = new StreamWriter(connection.GetStream());
-                writer.WriteLine("Hello");
+                var result = connection.BeginConnect(IPAddress.Parse(TEST_ADDRESS), TEST_PORT, null, connection);
+                if (result.AsyncWaitHandle.WaitOne(10000))
+                {
+                    Console.WriteLine("Inside");
+                }
+                Console.WriteLine("done");
+
+                /*StreamWriter writer = new StreamWriter(connection.GetStream());
+                writer.WriteLine("Hello");*/
             }
             catch (Exception e)
             {
