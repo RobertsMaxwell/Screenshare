@@ -15,21 +15,22 @@ namespace Screenshare
         {
             TcpListener server = null;
 
-            server = new TcpListener(new IPEndPoint(TEST_ADDRESS, TEST_PORT));
+            server = new TcpListener(TEST_PORT);
             server.Start();
 
             while (true)
             {
                 try
                 {
-                    Console.WriteLine("Connecting...");
+                    Console.WriteLine("Listening...");
                     TcpClient client = server.AcceptTcpClient();
-                    Console.WriteLine(client != null);
                     Console.WriteLine("Connected!");
 
-                    StreamReader stream = new StreamReader(client.GetStream());
-
-                    Console.WriteLine(stream.ReadLine());
+                    while(client.Connected)
+                    {
+                        StreamReader stream = new StreamReader(client.GetStream());
+                        Console.WriteLine(stream.ReadLine());
+                    }
                     break;
                 } catch(Exception e)
                 {
