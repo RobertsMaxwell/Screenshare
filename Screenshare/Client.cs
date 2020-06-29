@@ -20,6 +20,11 @@ namespace Screenshare
             try
             {
                 var connection = new TcpClient();
+<<<<<<< HEAD
+                connection.Connect(new IPEndPoint(IPAddress.Parse(TEST_ADDRESS), TEST_PORT));
+                StreamWriter writer = new StreamWriter(connection.GetStream());
+                writer.WriteLine("Hello");
+=======
                 var result = connection.BeginConnect(IPAddress.Parse(TEST_ADDRESS), TEST_PORT, null, connection);
                 /*StreamWriter sw = new StreamWriter(connection.GetStream());
                 sw.WriteLine("HellO!");*/
@@ -28,7 +33,8 @@ namespace Screenshare
                     StreamWriter sw = new StreamWriter(connection.GetStream());
                     sw.WriteLine("Hello!");
                 }
-                Thread.Sleep(100000);s
+                Thread.Sleep(100000);
+>>>>>>> 03cfac9d49feb5318d859423573d56072b00645c
             }
             catch (Exception e)
             {
