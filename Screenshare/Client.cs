@@ -28,7 +28,7 @@ namespace Screenshare
                     StreamWriter sw = new StreamWriter(connection.GetStream());
                     sw.WriteLine("Hello!");
                 }
-                Thread.Sleep(100000);s
+                Thread.Sleep(100000);
             }
             catch (Exception e)
             {
