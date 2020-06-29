@@ -17,10 +17,18 @@ namespace Screenshare
 
         public static void InitiateTCPConnect()
         {
-            var connection = new TcpClient();
-            connection.Connect(new IPEndPoint(IPAddress.Parse(TEST_ADDRESS), TEST_PORT));
-            StreamWriter writer = new StreamWriter(connection.GetStream());
-            writer.WriteLine("Hello");
+            try
+            {
+                var connection = new TcpClient();
+                connection.Connect(new IPEndPoint(IPAddress.Parse(TEST_ADDRESS), TEST_PORT));
+                StreamWriter writer = new StreamWriter(connection.GetStream());
+                writer.WriteLine("Hello");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
         }
     }
 }
