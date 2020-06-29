@@ -21,14 +21,14 @@ namespace Screenshare
             {
                 var connection = new TcpClient();
                 var result = connection.BeginConnect(IPAddress.Parse(TEST_ADDRESS), TEST_PORT, null, connection);
+                /*StreamWriter sw = new StreamWriter(connection.GetStream());
+                sw.WriteLine("HellO!");*/
                 if (result.AsyncWaitHandle.WaitOne(10000))
                 {
-                    Console.WriteLine("Inside");
+                    StreamWriter sw = new StreamWriter(connection.GetStream());
+                    sw.WriteLine("Hello!");
                 }
-                Console.WriteLine("done");
-
-                /*StreamWriter writer = new StreamWriter(connection.GetStream());
-                writer.WriteLine("Hello");*/
+                Thread.Sleep(100000);
             }
             catch (Exception e)
             {
