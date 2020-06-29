@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Screenshare
 {
-    static class Share
+    static class Client
     {
         public static string TEST_ADDRESS = "192.168.1.127";
         public static int TEST_PORT = 49152;
