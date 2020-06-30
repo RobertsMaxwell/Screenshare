@@ -28,8 +28,9 @@ namespace Screenshare
 
                     while(client.Connected)
                     {
-                        StreamReader stream = new StreamReader(client.GetStream());
-                        Console.WriteLine(stream.ReadLine());
+                        byte[] information = new byte[] { };
+                        client.GetStream().Read(information, 0, 1);
+                        Console.Write((char)information[0]);
                     }
                     break;
                 } catch(Exception e)
