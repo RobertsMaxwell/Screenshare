@@ -25,8 +25,9 @@ namespace Screenshare
                 sw.WriteLine("HellO!");*/
                 if (result.AsyncWaitHandle.WaitOne(10000))
                 {
-                    StreamWriter sw = new StreamWriter(connection.GetStream());
-                    sw.WriteLine("Hello!");
+                    Stream st = connection.GetStream();
+                    byte[] bytes = Encoding.ASCII.GetBytes("Pickle Rick!");
+                    st.Write(bytes, 0, bytes.Length);
                 }
                 Thread.Sleep(100000);
             }
