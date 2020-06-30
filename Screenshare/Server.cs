@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace Screenshare
 {
@@ -26,6 +27,8 @@ namespace Screenshare
                     TcpClient client = server.AcceptTcpClient();
                     Console.WriteLine("Connected!");
 
+                    //wait for client to write info
+                    Thread.Sleep(1000);
                     while(client.Connected)
                     {
                         byte[] information = new byte[] { };
