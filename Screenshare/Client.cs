@@ -23,12 +23,14 @@ namespace Screenshare
                 var connection = new TcpClient();
                 var result = connection.BeginConnect(IPAddress.Parse(TEST_ADDRESS), TEST_PORT, null, connection);
 
-                if (result.AsyncWaitHandle.WaitOne(10000))
+                if (result.AsyncWaitHandle.WaitOne(1000))
                 {
                     Console.WriteLine("Inside");
                     Stream st = connection.GetStream();
                     StreamWriter sw = new StreamWriter(st);
                     sw.WriteLine("Pickle Rick");
+                    sw.Close();
+                    //Console.WriteLine(new StreamReader(st).ReadToEndAsync().Result);
                 }
             }
             catch (Exception e)
