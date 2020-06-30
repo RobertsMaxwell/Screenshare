@@ -17,12 +17,14 @@ namespace Screenshare
 
         public static void InitiateTCPConnect()
         {
-            try
+            Stream stream = new MemoryStream();
+
+            /*try
             {
                 var connection = new TcpClient();
                 var result = connection.BeginConnect(IPAddress.Parse(TEST_ADDRESS), TEST_PORT, null, connection);
-                /*StreamWriter sw = new StreamWriter(connection.GetStream());
-                sw.WriteLine("HellO!");*/
+                *//*StreamWriter sw = new StreamWriter(connection.GetStream());
+                sw.WriteLine("HellO!");*//*
                 if (result.AsyncWaitHandle.WaitOne(10000))
                 {
                     Stream st = connection.GetStream();
@@ -34,8 +36,7 @@ namespace Screenshare
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-            }
-            
+            }*/
         }
     }
 }
