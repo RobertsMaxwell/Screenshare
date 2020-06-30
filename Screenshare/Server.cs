@@ -26,11 +26,9 @@ namespace Screenshare
                     TcpClient client = server.AcceptTcpClient();
                     Console.WriteLine("Connected!");
 
-                    while(client.Connected)
-                    {
-                        StreamReader stream = new StreamReader(client.GetStream());
-                        Console.WriteLine(stream.ReadLine());
-                    }
+                    StreamReader stream = new StreamReader(client.GetStream());
+
+                    Console.WriteLine(stream.ReadLine());
                     break;
                 } catch(Exception e)
                 {
