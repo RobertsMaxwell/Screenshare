@@ -17,28 +17,24 @@ namespace Screenshare
 
         public static void InitiateTCPConnect()
         {
-            Stream stream = new MemoryStream();
 
-            /*try
+            try
             {
                 var connection = new TcpClient();
                 var result = connection.BeginConnect(IPAddress.Parse(TEST_ADDRESS), TEST_PORT, null, connection);
-                *//*StreamWriter sw = new StreamWriter(connection.GetStream());
-                sw.WriteLine("HellO!");*//*
+
                 if (result.AsyncWaitHandle.WaitOne(10000))
                 {
+                    Console.WriteLine("Inside");
                     Stream st = connection.GetStream();
-                    //byte[] bytes = Encoding.ASCII.GetBytes("Pickle Rick!");
-                    //st.Write(bytes, 0, bytes.Length);
                     StreamWriter sw = new StreamWriter(st);
-                    sw.Write("Pickle Rick");
+                    sw.WriteLine("Pickle Rick");
                 }
-                Thread.Sleep(100000);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-            }*/
+            }
         }
     }
 }

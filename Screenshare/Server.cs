@@ -28,13 +28,9 @@ namespace Screenshare
                     Console.WriteLine("Connected!");
 
                     //wait for client to write info
-                    Thread.Sleep(1000);
-                    while(client.Connected)
-                    {
-                        byte[] information = new byte[] { };
-                        client.GetStream().Read(information, 0, 1);
-                        Console.Write((char)information[0]);
-                    }
+                    Thread.Sleep(1000);  
+                    StreamReader sr = new StreamReader(client.GetStream());
+                    Console.WriteLine(sr.ReadToEndAsync());
                     break;
                 } catch(Exception e)
                 {
