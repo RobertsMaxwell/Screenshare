@@ -30,7 +30,6 @@ namespace Screenshare
                     StreamWriter sw = new StreamWriter(st);
                     sw.WriteLine("Pickle Rick");
                     sw.Close();
-                    //Console.WriteLine(new StreamReader(st).ReadToEndAsync().Result);
                 }
             }
             catch (Exception e)
