@@ -30,7 +30,7 @@ namespace Screenshare
                     //wait for client to write info
                     Thread.Sleep(1000);  
                     StreamReader sr = new StreamReader(client.GetStream());
-                    Console.WriteLine(sr.ReadToEndAsync());
+                    Console.WriteLine(sr.ReadToEndAsync().Result);
                     break;
                 } catch(Exception e)
                 {

@@ -29,6 +29,7 @@ namespace Screenshare
                     Stream st = connection.GetStream();
                     StreamWriter sw = new StreamWriter(st);
                     sw.WriteLine("Pickle Rick");
+                    sw.Close();
                 }
             }
             catch (Exception e)
