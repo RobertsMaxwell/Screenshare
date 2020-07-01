@@ -19,17 +19,17 @@ namespace Screenshare
 
         public void Start()
         {
-            if(dropDownMenu.Text == "Send")
-            {
-                Client.InitiateTCPConnect();
-            }
-            else if(dropDownMenu.Text == "Receive")
+            if(dropDownMenu.Text == "Server")
             {
                 Server.StartTCPListener();
             }
+            else if(dropDownMenu.Text == "Client")
+            {
+                Client.InitiateTCPConnect();
+            }
             else
             {
-                MessageBox.Show("Select whether you are sending information or receiving it");
+                MessageBox.Show("Select either Server or Client");
             }
         }
     }

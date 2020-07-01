@@ -57,8 +57,8 @@
             this.dropDownMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dropDownMenu.FormattingEnabled = true;
             this.dropDownMenu.Items.AddRange(new object[] {
-            "Send",
-            "Receive"});
+            "Server",
+            "Client"});
             this.dropDownMenu.Location = new System.Drawing.Point(240, 41);
             this.dropDownMenu.Name = "dropDownMenu";
             this.dropDownMenu.Size = new System.Drawing.Size(141, 23);

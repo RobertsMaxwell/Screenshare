@@ -36,7 +36,7 @@ namespace Screenshare
 
                     byte[] information = new byte[informationSize];
                     st.Read(information, informationOffset, informationSize);
-                    FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.bmp"), FileMode.Create);
+                    FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create);
                     fs.Write(information, 0, information.Length);
                     fs.Close();
                 }
