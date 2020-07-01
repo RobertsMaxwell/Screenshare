@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace Screenshare
 {
@@ -17,7 +18,6 @@ namespace Screenshare
 
         public static void InitiateTCPConnect()
         {
-
             try
             {
                 var connection = new TcpClient();
@@ -25,11 +25,20 @@ namespace Screenshare
 
                 if (result.AsyncWaitHandle.WaitOne(1000))
                 {
-                    Console.WriteLine("Inside");
-                    Stream st = connection.GetStream();
-                    StreamWriter sw = new StreamWriter(st);
-                    sw.WriteLine("Pickle Rick");
-                    sw.Close();
+                    NetworkStream st = connection.GetStream();
+
+                    //wait for server to write info
+                    Thread.Sleep(1000);
+                    byte[] header = new byte[2];
+                    st.Read(header, 0, 2);
+                    int informationSize = header[0];
+                    int informationOffset = header[1];
+
+                    byte[] information = new byte[informationSize];
+                    st.Read(information, informationOffset, informationSize);
+                    FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.bmp"), FileMode.Create);
+                    fs.Write(information, 0, information.Length);
+                    fs.Close();
                 }
             }
             catch (Exception e)
