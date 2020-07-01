@@ -29,16 +29,24 @@ namespace Screenshare
 
                     //wait for server to write info
                     Thread.Sleep(1000);
-                    byte[] header = new byte[2];
-                    st.Read(header, 0, 2);
-                    int informationSize = header[0];
-                    int informationOffset = header[1];
+
+                    byte[] headerLength = new byte[1];
+                    st.Read(headerLength, 0, 1);
+                    int headerSize = headerLength[0];
+                    byte[] informationLength = new byte[headerSize - 1];
+                    st.Read(informationLength, 0, informationLength.Length);
+                    int informationSize = BitConverter.ToInt32(informationLength, 0);
+
+                    Console.WriteLine(informationSize);
 
                     byte[] information = new byte[informationSize];
-                    st.Read(information, informationOffset, informationSize);
-                    FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create);
-                    fs.Write(information, 0, information.Length);
-                    fs.Close();
+
+                    st.Read(information, 0, informationSize);
+
+                    using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create))
+                    {
+                        fs.Write(information, 0, information.Length);
+                    }
                 }
             }
             catch (Exception e)
