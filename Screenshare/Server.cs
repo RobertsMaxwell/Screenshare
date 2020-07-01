@@ -55,7 +55,7 @@ namespace Screenshare
             try
             {
                 Rectangle capture = Screen.PrimaryScreen.Bounds;
-                Bitmap bmp = new Bitmap(capture.Width, capture.Height, PixelFormat.Format24bppRgb);
+                Bitmap bmp = new Bitmap(capture.Width, capture.Height, PixelFormat.Format16bppGrayScale);
                 Graphics gfx = gfx = Graphics.FromImage(bmp);
 
                 //populate bmp
