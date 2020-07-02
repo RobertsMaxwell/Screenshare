@@ -34,6 +34,7 @@ namespace Screenshare
 
                 if (result.AsyncWaitHandle.WaitOne(1000))
                 {
+                    Console.WriteLine("Connected");
                     NetworkStream st = connection.GetStream();
 
                     BinaryFormatter bf = new BinaryFormatter();
