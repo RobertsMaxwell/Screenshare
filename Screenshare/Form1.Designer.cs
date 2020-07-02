@@ -144,6 +144,7 @@
             this.stopServer.TabIndex = 3;
             this.stopServer.Text = "Stop";
             this.stopServer.UseVisualStyleBackColor = true;
+            this.stopServer.Click += new System.EventHandler(this.stopServer_Click);
             // 
             // connectingLink
             // 
