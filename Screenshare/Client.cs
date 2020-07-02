@@ -28,7 +28,7 @@ namespace Screenshare
                     NetworkStream st = connection.GetStream();
 
                     //wait for server to write info
-                    Thread.Sleep(1000);
+                    Thread.Sleep(5000);
 
                     byte[] headerLength = new byte[1];
                     st.Read(headerLength, 0, 1);
@@ -37,12 +37,10 @@ namespace Screenshare
                     st.Read(informationLength, 0, informationLength.Length);
                     int informationSize = BitConverter.ToInt32(informationLength, 0);
 
-                    Console.WriteLine(informationSize);
-
                     byte[] information = new byte[informationSize];
                     st.Read(information, 0, informationSize);
 
-                    using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create))
+                    using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.png"), FileMode.Create))
                     {
                         fs.Write(information, 0, information.Length);
                     }
