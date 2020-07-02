@@ -12,25 +12,23 @@ namespace Screenshare
 {
     public partial class Form1 : Form
     {
+        public PictureBox MainScreen
+        {
+            get 
+            {
+                return screen;
+            }
+
+            set
+            {
+                screen = value;
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        public void Start()
-        {
-            if(dropDownMenu.Text == "Server")
-            {
-                Server.StartTCPListener();
-            }
-            else if(dropDownMenu.Text == "Client")
-            {
-                Client.InitiateTCPConnect();
-            }
-            else
-            {
-                MessageBox.Show("Select either Server or Client");
-            }
-        }
     }
 }

@@ -16,15 +16,16 @@ namespace Screenshare
     class Server
     {
         static TcpClient client;
+        static Screen displayScreen;
 
         public static int TEST_PORT = 49152;
         public static int framesPerSecond = 30;
         public static bool sendInformation = true;
 
-        public static void StartTCPListener()
+        public static void StartTCPListener(Screen screen)
         {
             TcpListener server = null;
-
+            displayScreen = screen;
             server = new TcpListener(TEST_PORT);
             server.Start();
             client = server.AcceptTcpClient();
@@ -42,7 +43,7 @@ namespace Screenshare
             }
         }
 
-        public static void SendImageToClient()
+        private static void SendImageToClient()
         {
             using (MemoryStream ms = new MemoryStream())
             {
@@ -71,23 +72,13 @@ namespace Screenshare
         {
             try
             {
-                Rectangle capture = Screen.PrimaryScreen.Bounds;
+                Rectangle capture = displayScreen.Bounds;
                 Bitmap bmp = new Bitmap(capture.Width, capture.Height, PixelFormat.Format16bppRgb555);
                 Graphics gfx = gfx = Graphics.FromImage(bmp);
                 
                 //populate bmp
-                gfx.CopyFromScreen(new Point(capture.Left, capture.Top), new Point(0, 0), capture.Size);
+                gfx.CopyFromScreen(new Point(capture.Left, capture.Top), new Point(capture.X, capture.Y), capture.Size);
                 return bmp;
-                //convert bmp to byte array then populate filestream
-                /*using (MemoryStream ms = new MemoryStream())
-                {
-                    using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create))
-                    {
-                        bmp.Save(ms, ImageFormat.Jpeg);
-                        byte[] bytes = ms.ToArray();
-                        fs.Write(bytes, 0, bytes.Length);
-                    }
-                }*/
             }
             catch (Exception e)
             {

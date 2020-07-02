@@ -13,17 +13,24 @@ using System.Drawing;
 
 namespace Screenshare
 {
-    static class Client
+    class Client
     {
-        public static string TEST_ADDRESS = "192.168.1.127";
-        public static int TEST_PORT = 49152;
+        public static int PORT = 49152;
+        public string address;
+        public PictureBox display;
 
-        public static void InitiateTCPConnect()
+        public Client(string address, PictureBox display)
+        {
+            this.address = address;
+            this.display = display;
+        }
+
+        public void InitiateTCPConnect()
         {
             try
             {
                 var connection = new TcpClient();
-                var result = connection.BeginConnect(IPAddress.Parse(TEST_ADDRESS), TEST_PORT, null, connection);
+                var result = connection.BeginConnect(IPAddress.Parse(address), PORT, null, connection);
 
                 if (result.AsyncWaitHandle.WaitOne(1000))
                 {
@@ -34,8 +41,8 @@ namespace Screenshare
 
                     using (MemoryStream ms = new MemoryStream(information))
                     {
-                        Form mainForm = Application.OpenForms["Form1"];
                         Image img = Image.FromStream(ms);
+                        display.Image = img;
                     }
                 }
             }
