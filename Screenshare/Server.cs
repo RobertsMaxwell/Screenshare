@@ -37,24 +37,12 @@ namespace Screenshare
                     {
                         GetScreenImage().Save(ms, ImageFormat.Jpeg);
                         byte[] screenInformation = ms.ToArray();
-                        //information length, information offset
-                        List<byte> screenInformationHeader = new List<byte>( new byte[] { 0 } );
-                        foreach(byte bt in BitConverter.GetBytes(screenInformation.Length))
-                        {
-                            screenInformationHeader.Add(bt);
-                        }
-                        screenInformationHeader[0] = (byte)screenInformationHeader.Count;
-
-
-                        Console.WriteLine(screenInformation.Length);
 
                         BinaryFormatter bf = new BinaryFormatter();
-                        //bf.Serialize(client.GetStream(), screenInformationHeader);
                         bf.Serialize(client.GetStream(), screenInformation);
 
                         client.GetStream().Close();
                     }
-                    Thread.Sleep(3000);
                     break;
                 } catch(Exception e)
                 {

@@ -34,17 +34,6 @@ namespace Screenshare
                     BinaryFormatter bf = new BinaryFormatter();
                     byte[] information = (byte[])bf.Deserialize(connection.GetStream());
 
-                   /* byte headerLength = new byte[1];
-                    st.Read(headerLength, 0, 1);
-                    int headerSize = headerLength[0];
-                    byte[] informationLength = new byte[headerSize - 1];
-                    st.Read(informationLength, 0, informationLength.Length);
-                    int informationSize = BitConverter.ToInt32(informationLength, 0);
-
-                    byte[] information = new byte[informationSize];
-
-                    st.Read(information, 0, informationSize);*/
-
                     using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create))
                     {
                         for (int i = 0; i < information.Length; i++)
