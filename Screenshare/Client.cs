@@ -34,17 +34,22 @@ namespace Screenshare
 
                 if (result.AsyncWaitHandle.WaitOne(1000))
                 {
-                    Console.WriteLine("Connected");
-                    NetworkStream st = connection.GetStream();
-
-                    BinaryFormatter bf = new BinaryFormatter();
-                    byte[] information = (byte[])bf.Deserialize(connection.GetStream());
-
-                    using (MemoryStream ms = new MemoryStream(information))
+                    while (connection.Connected)
                     {
-                        Image img = Image.FromStream(ms);
-                        display.Image = img;
-                        display.Update();
+                        NetworkStream st = connection.GetStream();
+
+                        BinaryFormatter bf = new BinaryFormatter();
+                        byte[] information = (byte[])bf.Deserialize(connection.GetStream());
+
+
+                        if (information.Length > 0)
+                        {
+                            using (MemoryStream ms = new MemoryStream(information))
+                            {
+                                Image img = Image.FromStream(ms);
+                                display.Image = img;
+                            }
+                        }
                     }
                 }
                 Thread.CurrentThread.Abort();

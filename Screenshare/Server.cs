@@ -36,6 +36,7 @@ namespace Screenshare
             {
                 try
                 {
+                    client.GetStream().Flush();
                     Thread thread = new Thread(new ThreadStart(SendImageToClient));
                     thread.Start();
                     Thread.Sleep(1000 / framesPerSecond);
@@ -58,7 +59,6 @@ namespace Screenshare
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.Serialize(client.GetStream(), screenInformation);
                 Console.WriteLine("Image Sent");
-                client.GetStream().Close();
                 Thread.CurrentThread.Abort();
             }
         }
