@@ -33,16 +33,16 @@ namespace Screenshare
         {
             //create/start server
             server = new TcpListener(PORT);
+            server.Start();
+            Console.WriteLine("Listening...");
             try
             {
-                server.Start();
+                client = server.AcceptTcpClient();
             }
-            catch (Exception)
+            catch
             {
                 return;
             }
-            Console.WriteLine("Listening...");
-            client = server.AcceptTcpClient();
             Console.WriteLine("Connected!");
 
             while (true)
