@@ -16,7 +16,7 @@ namespace Screenshare
     class Server
     {
         static TcpClient client;
-        static Screen displayScreen;
+        static Screen displayScreen = Screen.PrimaryScreen;
 
         public static int TEST_PORT = 49152;
         public static int framesPerSecond = 30;
@@ -24,11 +24,13 @@ namespace Screenshare
 
         public static void StartTCPListener()
         {
+            //create/start server
             TcpListener server = null;
-            displayScreen = Screen.PrimaryScreen;
             server = new TcpListener(TEST_PORT);
             server.Start();
+            Console.WriteLine("Listening...");
             client = server.AcceptTcpClient();
+            Console.WriteLine("Connected!");
 
             while (sendInformation)
             {
@@ -50,18 +52,9 @@ namespace Screenshare
                 GetScreenImage().Save(ms, ImageFormat.Jpeg);
                 byte[] screenInformation = ms.ToArray();
 
-                //information length, information offset
-                List<byte> screenInformationHeader = new List<byte>(new byte[] { 0 });
-                foreach (byte bt in BitConverter.GetBytes(screenInformation.Length))
-                {
-                    screenInformationHeader.Add(bt);
-                }
-                screenInformationHeader[0] = (byte)screenInformationHeader.Count;
-
-                Console.WriteLine(screenInformation.Length);
-
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.Serialize(client.GetStream(), screenInformation);
+                Console.WriteLine("Image Sent");
                 client.GetStream().Close();
                 Thread.CurrentThread.Abort();
             }
