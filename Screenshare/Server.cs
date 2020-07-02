@@ -37,6 +37,7 @@ namespace Screenshare
                 try
                 {
                     Thread thread = new Thread(new ThreadStart(SendImageToClient));
+                    thread.Start();
                     Thread.Sleep(1000 / framesPerSecond);
                     break;
                 } catch(Exception e)
