@@ -46,6 +46,7 @@ namespace Screenshare
                         display.Image = img;
                     }
                 }
+                Thread.CurrentThread.Abort();
             }
             catch (Exception e)
             {

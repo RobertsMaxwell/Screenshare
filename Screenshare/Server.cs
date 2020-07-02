@@ -38,11 +38,13 @@ namespace Screenshare
                 {
                     Thread thread = new Thread(new ThreadStart(SendImageToClient));
                     Thread.Sleep(1000 / framesPerSecond);
+                    break;
                 } catch(Exception e)
                 {
                     Console.WriteLine($"Error Message: {e.Message}");
                 }
             }
+            Thread.CurrentThread.Abort();
         }
 
         private static void SendImageToClient()
