@@ -22,10 +22,10 @@ namespace Screenshare
         public static int framesPerSecond = 30;
         public static bool sendInformation = true;
 
-        public static void StartTCPListener(Screen screen)
+        public static void StartTCPListener()
         {
             TcpListener server = null;
-            displayScreen = screen;
+            displayScreen = Screen.PrimaryScreen;
             server = new TcpListener(TEST_PORT);
             server.Start();
             client = server.AcceptTcpClient();
@@ -61,7 +61,6 @@ namespace Screenshare
                 Console.WriteLine(screenInformation.Length);
 
                 BinaryFormatter bf = new BinaryFormatter();
-                //bf.Serialize(client.GetStream(), screenInformationHeader);
                 bf.Serialize(client.GetStream(), screenInformation);
                 client.GetStream().Close();
                 Thread.CurrentThread.Abort();

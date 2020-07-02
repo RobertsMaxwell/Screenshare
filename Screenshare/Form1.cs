@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Screenshare
 {
@@ -42,13 +43,13 @@ namespace Screenshare
 
         private void startServer_Click(object sender, EventArgs e)
         {
-            Server.StartTCPListener(Screen.PrimaryScreen);
+            Thread thread = new Thread(new ThreadStart(Server.StartTCPListener));
         }
 
         private void startClient_Click(object sender, EventArgs e)
         {
             Client client = new Client(ipTextBox.Text.Trim(), screen);
-            client.InitiateTCPConnect();
+            Thread thread = new Thread(new ThreadStart(client.InitiateTCPConnect));
         }
 
     }
