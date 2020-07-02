@@ -32,7 +32,8 @@ namespace Screenshare
 
         private void startServer_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(new ThreadStart(Server.StartTCPListener));
+            Server server = new Server(screen);
+            Thread thread = new Thread(new ThreadStart(server.StartTCPListener));
             thread.Start();
             threadList.Add(thread);
         }

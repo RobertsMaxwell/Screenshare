@@ -15,6 +15,13 @@ namespace Screenshare
 {
     class Server
     {
+        public PictureBox display;
+
+        public Server(PictureBox display)
+        {
+            this.display = display;
+        }
+
         static TcpClient client;
         static Screen displayScreen = Screen.PrimaryScreen;
 
@@ -22,7 +29,7 @@ namespace Screenshare
         public static int framesPerSecond = 30;
         public static bool sendInformation = true;
 
-        public static void StartTCPListener()
+        public void StartTCPListener()
         {
             //create/start server
             TcpListener server = null;
@@ -39,6 +46,8 @@ namespace Screenshare
                     client.GetStream().Flush();
                     Thread thread = new Thread(new ThreadStart(SendImageToClient));
                     thread.Start();
+                    Image img = GetScreenImage();
+                    display.Image = img;
                     Thread.Sleep(1000 / framesPerSecond);
                 } catch(Exception e)
                 {

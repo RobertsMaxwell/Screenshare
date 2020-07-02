@@ -192,7 +192,6 @@
         #endregion
 
         private System.Windows.Forms.Button clientButton;
-        private System.Windows.Forms.PictureBox screen;
         private System.Windows.Forms.Button serverButton;
         private System.Windows.Forms.GroupBox clientGroupBox;
         private System.Windows.Forms.GroupBox serverGroupBox;
@@ -203,6 +202,7 @@
         private System.Windows.Forms.Button startClient;
         private System.Windows.Forms.Button stopServer;
         private System.Windows.Forms.Label sharingLink;
+        public System.Windows.Forms.PictureBox screen;
     }
 }
 
