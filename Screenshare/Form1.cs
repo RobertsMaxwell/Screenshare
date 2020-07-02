@@ -43,7 +43,6 @@ namespace Screenshare
 
         private void startServer_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Start");
             Thread thread = new Thread(new ThreadStart(Server.StartTCPListener));
             thread.Start();
         }
