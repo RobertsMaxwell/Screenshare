@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Screenshare
 {
@@ -28,24 +29,28 @@ namespace Screenshare
                     NetworkStream st = connection.GetStream();
 
                     //wait for server to write info
-                    Thread.Sleep(1000);
+                    Thread.Sleep(5000);
 
-                    byte[] headerLength = new byte[1];
+                    BinaryFormatter bf = new BinaryFormatter();
+                    byte[] information = (byte[])bf.Deserialize(connection.GetStream());
+
+                   /* byte headerLength = new byte[1];
                     st.Read(headerLength, 0, 1);
                     int headerSize = headerLength[0];
                     byte[] informationLength = new byte[headerSize - 1];
                     st.Read(informationLength, 0, informationLength.Length);
                     int informationSize = BitConverter.ToInt32(informationLength, 0);
 
-                    Console.WriteLine(informationSize);
-
                     byte[] information = new byte[informationSize];
 
-                    st.Read(information, 0, informationSize);
+                    st.Read(information, 0, informationSize);*/
 
-                    using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.png"), FileMode.Create))
+                    using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create))
                     {
-                        fs.Write(information, 0, information.Length);
+                        for (int i = 0; i < information.Length; i++)
+                        {
+                            fs.Write(new byte[] { information[i] }, 0, 1);
+                        }
                     }
                 }
             }

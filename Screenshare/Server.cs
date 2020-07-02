@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO.Compression;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Collections;
 
 namespace Screenshare
 {
@@ -36,7 +35,7 @@ namespace Screenshare
 
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        GetScreenImage().Save(ms, ImageFormat.Png);
+                        GetScreenImage().Save(ms, ImageFormat.Jpeg);
                         byte[] screenInformation = ms.ToArray();
                         //information length, information offset
                         List<byte> screenInformationHeader = new List<byte>( new byte[] { 0 } );
@@ -46,9 +45,13 @@ namespace Screenshare
                         }
                         screenInformationHeader[0] = (byte)screenInformationHeader.Count;
 
-                        client.GetStream().Write(screenInformationHeader.ToArray(), 0, screenInformationHeader.Count);
-                        client.GetStream().Write(screenInformation, 0, screenInformation.Length);
-                        Thread.Sleep(5000);
+
+                        Console.WriteLine(screenInformation.Length);
+
+                        BinaryFormatter bf = new BinaryFormatter();
+                        //bf.Serialize(client.GetStream(), screenInformationHeader);
+                        bf.Serialize(client.GetStream(), screenInformation);
+
                         client.GetStream().Close();
                     }
                     Thread.Sleep(3000);
