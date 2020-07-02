@@ -41,6 +41,7 @@ namespace Screenshare
                         BinaryFormatter bf = new BinaryFormatter();
                         byte[] information = (byte[])bf.Deserialize(connection.GetStream());
 
+
                         if (information.Length > 0)
                         {
                             using (MemoryStream ms = new MemoryStream(information))
