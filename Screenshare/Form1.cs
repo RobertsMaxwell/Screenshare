@@ -16,21 +16,5 @@ namespace Screenshare
         {
             InitializeComponent();
         }
-
-        public void Start()
-        {
-            if(dropDownMenu.Text == "Server")
-            {
-                Server.StartTCPListener();
-            }
-            else if(dropDownMenu.Text == "Client")
-            {
-                Client.InitiateTCPConnect();
-            }
-            else
-            {
-                MessageBox.Show("Select either Server or Client");
-            }
-        }
     }
 }
