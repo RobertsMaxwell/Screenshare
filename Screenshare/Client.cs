@@ -29,17 +29,14 @@ namespace Screenshare
                     NetworkStream st = connection.GetStream();
 
                     //wait for server to write info
-                    Thread.Sleep(5000);
+                    Thread.Sleep(1);
 
                     BinaryFormatter bf = new BinaryFormatter();
                     byte[] information = (byte[])bf.Deserialize(connection.GetStream());
 
                     using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create))
                     {
-                        for (int i = 0; i < information.Length; i++)
-                        {
-                            fs.Write(new byte[] { information[i] }, 0, 1);
-                        }
+                        fs.Write(information, 0, information.Length);
                     }
                 }
             }
