@@ -29,28 +29,14 @@ namespace Screenshare
                     NetworkStream st = connection.GetStream();
 
                     //wait for server to write info
-                    Thread.Sleep(5000);
+                    Thread.Sleep(1);
 
                     BinaryFormatter bf = new BinaryFormatter();
                     byte[] information = (byte[])bf.Deserialize(connection.GetStream());
 
-                   /* byte headerLength = new byte[1];
-                    st.Read(headerLength, 0, 1);
-                    int headerSize = headerLength[0];
-                    byte[] informationLength = new byte[headerSize - 1];
-                    st.Read(informationLength, 0, informationLength.Length);
-                    int informationSize = BitConverter.ToInt32(informationLength, 0);
-
-                    byte[] information = new byte[informationSize];
-
-                    st.Read(information, 0, informationSize);*/
-
                     using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create))
                     {
-                        for (int i = 0; i < information.Length; i++)
-                        {
-                            fs.Write(new byte[] { information[i] }, 0, 1);
-                        }
+                        fs.Write(information, 0, information.Length);
                     }
                 }
             }
