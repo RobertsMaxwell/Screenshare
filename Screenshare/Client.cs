@@ -43,7 +43,7 @@ namespace Screenshare
 
                     st.Read(information, 0, informationSize);
 
-                    using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create))
+                    using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.png"), FileMode.Create))
                     {
                         fs.Write(information, 0, information.Length);
                     }
