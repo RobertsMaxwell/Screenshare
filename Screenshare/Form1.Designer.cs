@@ -40,6 +40,7 @@
             this.stopServer = new System.Windows.Forms.Button();
             this.connectingLink = new System.Windows.Forms.Label();
             this.startServer = new System.Windows.Forms.Button();
+            this.copyButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.screen)).BeginInit();
             this.clientGroupBox.SuspendLayout();
             this.serverGroupBox.SuspendLayout();
@@ -122,6 +123,7 @@
             // 
             this.serverGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.serverGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.serverGroupBox.Controls.Add(this.copyButton);
             this.serverGroupBox.Controls.Add(this.sharingLink);
             this.serverGroupBox.Controls.Add(this.stopServer);
             this.serverGroupBox.Controls.Add(this.connectingLink);
@@ -176,6 +178,16 @@
             this.startServer.UseVisualStyleBackColor = true;
             this.startServer.Click += new System.EventHandler(this.startServer_Click);
             // 
+            // copyButton
+            // 
+            this.copyButton.Location = new System.Drawing.Point(144, 45);
+            this.copyButton.Name = "copyButton";
+            this.copyButton.Size = new System.Drawing.Size(57, 23);
+            this.copyButton.TabIndex = 6;
+            this.copyButton.Text = "Copy";
+            this.copyButton.UseVisualStyleBackColor = true;
+            this.copyButton.Click += new System.EventHandler(this.copyButton_Click);
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,6 +223,7 @@
         private System.Windows.Forms.Button stopServer;
         private System.Windows.Forms.Label sharingLink;
         public System.Windows.Forms.PictureBox screen;
+        private System.Windows.Forms.Button copyButton;
     }
 }
 

@@ -95,7 +95,7 @@ namespace Screenshare
             return "Error";
         }
 
-        private void copy_Click(object sender, EventArgs e)
+        private void copyButton_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(GetLocalAddress());
         }
