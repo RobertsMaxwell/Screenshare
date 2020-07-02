@@ -45,6 +45,8 @@ namespace Screenshare
                     Console.WriteLine($"Error Message: {e.Message}");
                 }
             }
+            client.GetStream().Close();
+            client.Close();
             Thread.CurrentThread.Abort();
         }
 
@@ -57,7 +59,6 @@ namespace Screenshare
 
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.Serialize(client.GetStream(), screenInformation);
-                Console.WriteLine("Image Sent");
                 Thread.CurrentThread.Abort();
             }
         }

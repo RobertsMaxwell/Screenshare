@@ -8,26 +8,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Screenshare
 {
-    public partial class Form1 : Form
+    public partial class Form : System.Windows.Forms.Form
     {
         public List<Thread> threadList = new List<Thread>();
 
-        public Form1()
+        public Form()
         {
             InitializeComponent();
+
+            serverGroupBox.Visible = false;
+            clientGroupBox.Visible = false;
+            sharingLink.Text = GetLocalAddress();
         }
 
         private void serverButton_Click(object sender, EventArgs e)
         {
-            serverGroupBox.BringToFront();
+            if (!serverGroupBox.Visible)
+            {
+                clientGroupBox.Visible = false;             
+                serverGroupBox.BringToFront();
+                serverGroupBox.Visible = true;
+
+            }
         }
 
         private void clientButton_Click(object sender, EventArgs e)
         {
-            clientGroupBox.BringToFront();
+            if (!clientGroupBox.Visible)
+            {
+                serverGroupBox.Visible = false; 
+                clientGroupBox.BringToFront();
+                clientGroupBox.Visible = true;
+            }
         }
 
         private void startServer_Click(object sender, EventArgs e)
@@ -49,9 +66,28 @@ namespace Screenshare
         {
             foreach (Thread thread in threadList)
             {
+                Console.WriteLine("INSIDE");
                 thread.Abort();
             }
-            threadList = new List<Thread>();
+        }
+
+        public string GetLocalAddress()
+        {
+            var host = Dns.GetHostName();
+
+            foreach (IPAddress add in Dns.GetHostAddresses(host))
+            {
+                if (add.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return add.ToString();
+                }
+            }
+            return "Error";
+        }
+
+        private void copy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(GetLocalAddress());
         }
     }
 }
