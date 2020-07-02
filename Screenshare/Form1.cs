@@ -28,10 +28,6 @@ namespace Screenshare
         public Form1()
         {
             InitializeComponent();
-            foreach(var screen in Screen.AllScreens)
-            {
-                monitorList.Items.Add(screen.DeviceName);
-            }
         }
 
         private void serverButton_Click(object sender, EventArgs e)
@@ -46,13 +42,13 @@ namespace Screenshare
 
         private void startServer_Click(object sender, EventArgs e)
         {
-            Server.StartTCPListener();
+            Server.StartTCPListener(Screen.PrimaryScreen);
         }
 
         private void startClient_Click(object sender, EventArgs e)
         {
-            Client.InitiateTCPConnect();
-            Client.TEST_ADDRESS = ipTextBox.Text.Trim();
+            Client client = new Client(ipTextBox.Text.Trim(), screen);
+            client.InitiateTCPConnect();
         }
 
     }

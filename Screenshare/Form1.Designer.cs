@@ -32,16 +32,14 @@
             this.screen = new System.Windows.Forms.PictureBox();
             this.serverButton = new System.Windows.Forms.Button();
             this.clientGroupBox = new System.Windows.Forms.GroupBox();
-            this.serverGroupBox = new System.Windows.Forms.GroupBox();
-            this.monitorList = new System.Windows.Forms.ComboBox();
-            this.sharingLink = new System.Windows.Forms.Label();
-            this.screenLabel = new System.Windows.Forms.Label();
-            this.stopServer = new System.Windows.Forms.Button();
-            this.connectingLink = new System.Windows.Forms.Label();
-            this.startServer = new System.Windows.Forms.Button();
             this.ipAddress = new System.Windows.Forms.Label();
             this.ipTextBox = new System.Windows.Forms.TextBox();
             this.startClient = new System.Windows.Forms.Button();
+            this.serverGroupBox = new System.Windows.Forms.GroupBox();
+            this.sharingLink = new System.Windows.Forms.Label();
+            this.stopServer = new System.Windows.Forms.Button();
+            this.connectingLink = new System.Windows.Forms.Label();
+            this.startServer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.screen)).BeginInit();
             this.clientGroupBox.SuspendLayout();
             this.serverGroupBox.SuspendLayout();
@@ -88,11 +86,36 @@
             this.clientGroupBox.TabIndex = 4;
             this.clientGroupBox.TabStop = false;
             // 
+            // ipAddress
+            // 
+            this.ipAddress.AutoSize = true;
+            this.ipAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ipAddress.Location = new System.Drawing.Point(7, 20);
+            this.ipAddress.Name = "ipAddress";
+            this.ipAddress.Size = new System.Drawing.Size(74, 16);
+            this.ipAddress.TabIndex = 2;
+            this.ipAddress.Text = "IP Address";
+            // 
+            // ipTextBox
+            // 
+            this.ipTextBox.Location = new System.Drawing.Point(87, 19);
+            this.ipTextBox.Name = "ipTextBox";
+            this.ipTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ipTextBox.TabIndex = 1;
+            // 
+            // startClient
+            // 
+            this.startClient.Location = new System.Drawing.Point(64, 291);
+            this.startClient.Name = "startClient";
+            this.startClient.Size = new System.Drawing.Size(85, 35);
+            this.startClient.TabIndex = 0;
+            this.startClient.Text = "Start Connection";
+            this.startClient.UseVisualStyleBackColor = true;
+            this.startClient.Click += new System.EventHandler(this.startClient_Click);
+            // 
             // serverGroupBox
             // 
-            this.serverGroupBox.Controls.Add(this.monitorList);
             this.serverGroupBox.Controls.Add(this.sharingLink);
-            this.serverGroupBox.Controls.Add(this.screenLabel);
             this.serverGroupBox.Controls.Add(this.stopServer);
             this.serverGroupBox.Controls.Add(this.connectingLink);
             this.serverGroupBox.Controls.Add(this.startServer);
@@ -101,14 +124,6 @@
             this.serverGroupBox.Size = new System.Drawing.Size(211, 341);
             this.serverGroupBox.TabIndex = 5;
             this.serverGroupBox.TabStop = false;
-            // 
-            // monitorList
-            // 
-            this.monitorList.FormattingEnabled = true;
-            this.monitorList.Location = new System.Drawing.Point(21, 125);
-            this.monitorList.Name = "monitorList";
-            this.monitorList.Size = new System.Drawing.Size(121, 21);
-            this.monitorList.TabIndex = 6;
             // 
             // sharingLink
             // 
@@ -119,16 +134,6 @@
             this.sharingLink.Size = new System.Drawing.Size(93, 16);
             this.sharingLink.TabIndex = 5;
             this.sharingLink.Text = "ex: 192.168.1.1";
-            // 
-            // screenLabel
-            // 
-            this.screenLabel.AutoSize = true;
-            this.screenLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.screenLabel.Location = new System.Drawing.Point(19, 95);
-            this.screenLabel.Name = "screenLabel";
-            this.screenLabel.Size = new System.Drawing.Size(51, 16);
-            this.screenLabel.TabIndex = 4;
-            this.screenLabel.Text = "Screen";
             // 
             // stopServer
             // 
@@ -160,33 +165,6 @@
             this.startServer.Text = "Start";
             this.startServer.UseVisualStyleBackColor = true;
             this.startServer.Click += new System.EventHandler(this.startServer_Click);
-            // 
-            // ipAddress
-            // 
-            this.ipAddress.AutoSize = true;
-            this.ipAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ipAddress.Location = new System.Drawing.Point(7, 20);
-            this.ipAddress.Name = "ipAddress";
-            this.ipAddress.Size = new System.Drawing.Size(74, 16);
-            this.ipAddress.TabIndex = 2;
-            this.ipAddress.Text = "IP Address";
-            // 
-            // ipTextBox
-            // 
-            this.ipTextBox.Location = new System.Drawing.Point(87, 19);
-            this.ipTextBox.Name = "ipTextBox";
-            this.ipTextBox.Size = new System.Drawing.Size(100, 20);
-            this.ipTextBox.TabIndex = 1;
-            // 
-            // startClient
-            // 
-            this.startClient.Location = new System.Drawing.Point(64, 291);
-            this.startClient.Name = "startClient";
-            this.startClient.Size = new System.Drawing.Size(85, 35);
-            this.startClient.TabIndex = 0;
-            this.startClient.Text = "Start Connection";
-            this.startClient.UseVisualStyleBackColor = true;
-            this.startClient.Click += new System.EventHandler(this.startClient_Click);
             // 
             // Form1
             // 
@@ -223,8 +201,6 @@
         private System.Windows.Forms.Button startClient;
         private System.Windows.Forms.Button stopServer;
         private System.Windows.Forms.Label sharingLink;
-        private System.Windows.Forms.Label screenLabel;
-        private System.Windows.Forms.ComboBox monitorList;
     }
 }
 
