@@ -43,13 +43,16 @@ namespace Screenshare
 
         private void startServer_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("Start");
             Thread thread = new Thread(new ThreadStart(Server.StartTCPListener));
+            thread.Start();
         }
 
         private void startClient_Click(object sender, EventArgs e)
         {
             Client client = new Client(ipTextBox.Text.Trim(), screen);
             Thread thread = new Thread(new ThreadStart(client.InitiateTCPConnect));
+            thread.Start();
         }
 
     }
