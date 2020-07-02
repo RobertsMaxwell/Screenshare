@@ -36,7 +36,6 @@
             this.ipTextBox = new System.Windows.Forms.TextBox();
             this.startClient = new System.Windows.Forms.Button();
             this.serverGroupBox = new System.Windows.Forms.GroupBox();
-            this.copy = new System.Windows.Forms.Button();
             this.sharingLink = new System.Windows.Forms.Label();
             this.stopServer = new System.Windows.Forms.Button();
             this.connectingLink = new System.Windows.Forms.Label();
@@ -123,7 +122,6 @@
             // 
             this.serverGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.serverGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.serverGroupBox.Controls.Add(this.copy);
             this.serverGroupBox.Controls.Add(this.sharingLink);
             this.serverGroupBox.Controls.Add(this.stopServer);
             this.serverGroupBox.Controls.Add(this.connectingLink);
@@ -133,16 +131,6 @@
             this.serverGroupBox.Size = new System.Drawing.Size(220, 520);
             this.serverGroupBox.TabIndex = 5;
             this.serverGroupBox.TabStop = false;
-            // 
-            // copy
-            // 
-            this.copy.Location = new System.Drawing.Point(144, 45);
-            this.copy.Name = "copy";
-            this.copy.Size = new System.Drawing.Size(70, 23);
-            this.copy.TabIndex = 6;
-            this.copy.Text = "Copy";
-            this.copy.UseVisualStyleBackColor = true;
-            this.copy.Click += new System.EventHandler(this.copy_Click);
             // 
             // sharingLink
             // 
@@ -212,7 +200,6 @@
         #endregion
 
         private System.Windows.Forms.Button clientButton;
-        private System.Windows.Forms.PictureBox screen;
         private System.Windows.Forms.Button serverButton;
         private System.Windows.Forms.GroupBox clientGroupBox;
         private System.Windows.Forms.GroupBox serverGroupBox;
@@ -223,7 +210,7 @@
         private System.Windows.Forms.Button startClient;
         private System.Windows.Forms.Button stopServer;
         private System.Windows.Forms.Label sharingLink;
-        private System.Windows.Forms.Button copy;
+        public System.Windows.Forms.PictureBox screen;
     }
 }
 

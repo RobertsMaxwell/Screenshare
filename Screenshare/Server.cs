@@ -15,39 +15,59 @@ namespace Screenshare
 {
     class Server
     {
+        public PictureBox display;
+        public int framesPerSecond;
+        TcpListener server = null;
+
+        public Server(PictureBox display, int fps = 30)
+        {
+            this.display = display;
+            framesPerSecond = fps;
+        }
+
         static TcpClient client;
         static Screen displayScreen = Screen.PrimaryScreen;
+        static int PORT = 49152;
 
-        public static int TEST_PORT = 49152;
-        public static int framesPerSecond = 30;
-        public static bool sendInformation = true;
-
-        public static void StartTCPListener()
+        public void StartTCPListener()
         {
             //create/start server
-            TcpListener server = null;
-            server = new TcpListener(TEST_PORT);
-            server.Start();
+            server = new TcpListener(PORT);
+            try
+            {
+                server.Start();
+            }
+            catch (Exception)
+            {
+                return;
+            }
             Console.WriteLine("Listening...");
             client = server.AcceptTcpClient();
             Console.WriteLine("Connected!");
 
-            while (sendInformation)
+            while (true)
             {
                 try
                 {
                     client.GetStream().Flush();
                     Thread thread = new Thread(new ThreadStart(SendImageToClient));
                     thread.Start();
+                    Image img = GetScreenImage();
+                    display.Image = img;
                     Thread.Sleep(1000 / framesPerSecond);
                 } catch(Exception e)
                 {
                     Console.WriteLine($"Error Message: {e.Message}");
                 }
             }
-            client.GetStream().Close();
-            client.Close();
-            Thread.CurrentThread.Abort();
+        }
+
+        public void CloseServer()
+        {
+            if (server != null)
+            {
+                server.Stop();
+            }
         }
 
         private static void SendImageToClient()

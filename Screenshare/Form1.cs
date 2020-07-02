@@ -16,6 +16,8 @@ namespace Screenshare
     public partial class Form : System.Windows.Forms.Form
     {
         public List<Thread> threadList = new List<Thread>();
+        Server server;
+        bool active = false;
 
         public Form()
         {
@@ -49,9 +51,14 @@ namespace Screenshare
 
         private void startServer_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(new ThreadStart(Server.StartTCPListener));
-            thread.Start();
-            threadList.Add(thread);
+            if (!active)
+            {
+                server = new Server(screen);
+                Thread thread = new Thread(new ThreadStart(server.StartTCPListener));
+                thread.Start();
+                threadList.Add(thread);
+                active = true;
+            }
         }
 
         private void startClient_Click(object sender, EventArgs e)
@@ -64,11 +71,14 @@ namespace Screenshare
 
         private void stopServer_Click(object sender, EventArgs e)
         {
+            server.CloseServer();
             foreach (Thread thread in threadList)
             {
-                Console.WriteLine("INSIDE");
                 thread.Abort();
             }
+            Console.WriteLine("Cancels");
+            threadList = new List<Thread>();
+            active = false;
         }
 
         public string GetLocalAddress()
