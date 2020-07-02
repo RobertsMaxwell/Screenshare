@@ -12,6 +12,19 @@ namespace Screenshare
 {
     public partial class Form1 : Form
     {
+        public PictureBox MainScreen
+        {
+            get 
+            {
+                return screen;
+            }
+
+            set
+            {
+                screen = value;
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -41,5 +54,6 @@ namespace Screenshare
             Client.InitiateTCPConnect();
             Client.TEST_ADDRESS = ipTextBox.Text.Trim();
         }
+
     }
 }

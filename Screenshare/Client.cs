@@ -9,34 +9,40 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Drawing;
 
 namespace Screenshare
 {
-    static class Client
+    class Client
     {
-        public static string TEST_ADDRESS = "192.168.1.127";
-        public static int TEST_PORT = 49152;
+        public static int PORT = 49152;
+        public string address;
+        public PictureBox display;
 
-        public static void InitiateTCPConnect()
+        public Client(string address, PictureBox display)
+        {
+            this.address = address;
+            this.display = display;
+        }
+
+        public void InitiateTCPConnect()
         {
             try
             {
                 var connection = new TcpClient();
-                var result = connection.BeginConnect(IPAddress.Parse(TEST_ADDRESS), TEST_PORT, null, connection);
+                var result = connection.BeginConnect(IPAddress.Parse(address), PORT, null, connection);
 
                 if (result.AsyncWaitHandle.WaitOne(1000))
                 {
                     NetworkStream st = connection.GetStream();
 
-                    //wait for server to write info
-                    Thread.Sleep(1);
-
                     BinaryFormatter bf = new BinaryFormatter();
                     byte[] information = (byte[])bf.Deserialize(connection.GetStream());
 
-                    using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create))
+                    using (MemoryStream ms = new MemoryStream(information))
                     {
-                        fs.Write(information, 0, information.Length);
+                        Image img = Image.FromStream(ms);
+                        display.Image = img;
                     }
                 }
             }
