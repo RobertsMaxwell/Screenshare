@@ -43,6 +43,7 @@ namespace Screenshare
                     {
                         Image img = Image.FromStream(ms);
                         display.Image = img;
+                        display.Update();
                     }
                 }
             }
