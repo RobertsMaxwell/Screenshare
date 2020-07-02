@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Drawing;
 
 namespace Screenshare
 {
@@ -28,15 +29,13 @@ namespace Screenshare
                 {
                     NetworkStream st = connection.GetStream();
 
-                    //wait for server to write info
-                    Thread.Sleep(1);
-
                     BinaryFormatter bf = new BinaryFormatter();
                     byte[] information = (byte[])bf.Deserialize(connection.GetStream());
 
-                    using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.jpg"), FileMode.Create))
+                    using (MemoryStream ms = new MemoryStream(information))
                     {
-                        fs.Write(information, 0, information.Length);
+                        Form mainForm = Application.OpenForms["Form1"];
+                        Image img = Image.FromStream(ms);
                     }
                 }
             }

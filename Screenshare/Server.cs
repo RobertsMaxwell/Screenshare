@@ -15,8 +15,11 @@ namespace Screenshare
 {
     class Server
     {
-        public static IPAddress TEST_ADDRESS = IPAddress.Parse("192.168.1.103");
+        static TcpClient client;
+
         public static int TEST_PORT = 49152;
+        public static int framesPerSecond = 30;
+        public static bool sendInformation = true;
 
         public static void StartTCPListener()
         {
@@ -24,41 +27,43 @@ namespace Screenshare
 
             server = new TcpListener(TEST_PORT);
             server.Start();
+            client = server.AcceptTcpClient();
 
-            while (true)
+            while (sendInformation)
             {
                 try
                 {
-                    Console.WriteLine("Listening...");
-                    TcpClient client = server.AcceptTcpClient();
-                    Console.WriteLine("Connected!");
-
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        GetScreenImage().Save(ms, ImageFormat.Jpeg);
-                        byte[] screenInformation = ms.ToArray();
-
-                        //information length, information offset
-                        List<byte> screenInformationHeader = new List<byte>( new byte[] { 0 } );
-                        foreach(byte bt in BitConverter.GetBytes(screenInformation.Length))
-                        {
-                            screenInformationHeader.Add(bt);
-                        }
-                        screenInformationHeader[0] = (byte)screenInformationHeader.Count;
-
-                        Console.WriteLine(screenInformation.Length);
-
-                        BinaryFormatter bf = new BinaryFormatter();
-                        //bf.Serialize(client.GetStream(), screenInformationHeader);
-                        bf.Serialize(client.GetStream(), screenInformation);
-                        client.GetStream().Close();
-                    }
-                    Thread.Sleep(3000);
-                    break;
+                    Thread thread = new Thread(new ThreadStart(SendImageToClient));
+                    Thread.Sleep(1000 / framesPerSecond);
                 } catch(Exception e)
                 {
                     Console.WriteLine($"Error Message: {e.Message}");
                 }
+            }
+        }
+
+        public static void SendImageToClient()
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                GetScreenImage().Save(ms, ImageFormat.Jpeg);
+                byte[] screenInformation = ms.ToArray();
+
+                //information length, information offset
+                List<byte> screenInformationHeader = new List<byte>(new byte[] { 0 });
+                foreach (byte bt in BitConverter.GetBytes(screenInformation.Length))
+                {
+                    screenInformationHeader.Add(bt);
+                }
+                screenInformationHeader[0] = (byte)screenInformationHeader.Count;
+
+                Console.WriteLine(screenInformation.Length);
+
+                BinaryFormatter bf = new BinaryFormatter();
+                //bf.Serialize(client.GetStream(), screenInformationHeader);
+                bf.Serialize(client.GetStream(), screenInformation);
+                client.GetStream().Close();
+                Thread.CurrentThread.Abort();
             }
         }
 
