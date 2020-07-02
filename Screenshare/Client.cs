@@ -38,6 +38,7 @@ namespace Screenshare
                     int informationSize = BitConverter.ToInt32(informationLength, 0);
 
                     byte[] information = new byte[informationSize];
+
                     st.Read(information, 0, informationSize);
 
                     using (FileStream fs = new FileStream(Path.Combine(Path.GetTempPath(), "image.png"), FileMode.Create))

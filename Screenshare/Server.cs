@@ -6,8 +6,9 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.IO.Compression;
 
 namespace Screenshare
 {
@@ -33,16 +34,25 @@ namespace Screenshare
 
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        GetScreenImage().Save(ms, ImageFormat.Jpeg);
+                        GetScreenImage().Save(ms, ImageFormat.Png);
                         byte[] screenInformation = ms.ToArray();
 
                         //information length, information offset
-                        byte[] screenInformationHeader = new byte[] {(byte)screenInformation.Length, 0};
-                        screenInformationHeader[1] = (byte)screenInformationHeader.Length;
+                        List<byte> screenInformationHeader = new List<byte>( new byte[] { 0 } );
+                        foreach(byte bt in BitConverter.GetBytes(screenInformation.Length))
+                        {
+                            screenInformationHeader.Add(bt);
+                        }
+                        screenInformationHeader[0] = (byte)screenInformationHeader.Count;
 
-                        client.GetStream().Write(screenInformation, screenInformationHeader[1], screenInformation.Length);
+                        Console.WriteLine(screenInformation.Length);
+
+                        client.GetStream().Write(screenInformationHeader.ToArray(), 0, screenInformationHeader.Count);
+                        client.GetStream().Write(screenInformation, 0, screenInformation.Length);
+                        client.GetStream().Close();
                     }
-
+                    Thread.Sleep(3000);
+                    break;
                 } catch(Exception e)
                 {
                     Console.WriteLine($"Error Message: {e.Message}");
@@ -57,11 +67,10 @@ namespace Screenshare
                 Rectangle capture = Screen.PrimaryScreen.Bounds;
                 Bitmap bmp = new Bitmap(capture.Width, capture.Height, PixelFormat.Format16bppRgb555);
                 Graphics gfx = gfx = Graphics.FromImage(bmp);
-
+                
                 //populate bmp
                 gfx.CopyFromScreen(new Point(capture.Left, capture.Top), new Point(0, 0), capture.Size);
                 return bmp;
-
                 //convert bmp to byte array then populate filestream
                 /*using (MemoryStream ms = new MemoryStream())
                 {
@@ -73,9 +82,9 @@ namespace Screenshare
                     }
                 }*/
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw new Exception("Error Capturing Screen");
+                throw new Exception(e.Message);
             }
         }
     }
