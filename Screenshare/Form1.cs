@@ -13,18 +13,7 @@ namespace Screenshare
 {
     public partial class Form1 : Form
     {
-        public PictureBox MainScreen
-        {
-            get 
-            {
-                return screen;
-            }
-
-            set
-            {
-                screen = value;
-            }
-        }
+        public List<Thread> threadList = new List<Thread>();
 
         public Form1()
         {
@@ -45,6 +34,7 @@ namespace Screenshare
         {
             Thread thread = new Thread(new ThreadStart(Server.StartTCPListener));
             thread.Start();
+            threadList.Add(thread);
         }
 
         private void startClient_Click(object sender, EventArgs e)
@@ -52,7 +42,16 @@ namespace Screenshare
             Client client = new Client(ipTextBox.Text.Trim(), screen);
             Thread thread = new Thread(new ThreadStart(client.InitiateTCPConnect));
             thread.Start();
+            threadList.Add(thread);
         }
 
+        private void stopServer_Click(object sender, EventArgs e)
+        {
+            foreach (Thread thread in threadList)
+            {
+                thread.Abort();
+            }
+            threadList = new List<Thread>();
+        }
     }
 }
