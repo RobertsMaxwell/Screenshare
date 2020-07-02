@@ -60,7 +60,8 @@
             // 
             this.screen.Location = new System.Drawing.Point(255, 32);
             this.screen.Name = "screen";
-            this.screen.Size = new System.Drawing.Size(611, 445);
+            this.screen.Size = new System.Drawing.Size(960, 540);
+            this.screen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.screen.TabIndex = 1;
             this.screen.TabStop = false;
             // 
@@ -171,7 +172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 516);
+            this.ClientSize = new System.Drawing.Size(1243, 606);
             this.Controls.Add(this.serverGroupBox);
             this.Controls.Add(this.clientGroupBox);
             this.Controls.Add(this.serverButton);
