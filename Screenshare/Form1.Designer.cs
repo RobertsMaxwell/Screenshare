@@ -30,15 +30,17 @@
         {
             this.clientButton = new System.Windows.Forms.Button();
             this.screen = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.serverButton = new System.Windows.Forms.Button();
             this.clientGroupBox = new System.Windows.Forms.GroupBox();
             this.serverGroupBox = new System.Windows.Forms.GroupBox();
+            this.monitorList = new System.Windows.Forms.ComboBox();
+            this.sharingLink = new System.Windows.Forms.Label();
+            this.screenLabel = new System.Windows.Forms.Label();
             this.stopServer = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.connectingLink = new System.Windows.Forms.Label();
             this.startServer = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ipAddress = new System.Windows.Forms.Label();
+            this.ipTextBox = new System.Windows.Forms.TextBox();
             this.startClient = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.screen)).BeginInit();
             this.clientGroupBox.SuspendLayout();
@@ -54,30 +56,31 @@
             this.clientButton.TabIndex = 0;
             this.clientButton.Text = "Client";
             this.clientButton.UseVisualStyleBackColor = true;
+            this.clientButton.Click += new System.EventHandler(this.clientButton_Click);
             // 
             // screen
             // 
-            this.screen.Location = new System.Drawing.Point(253, 32);
+            this.screen.Location = new System.Drawing.Point(255, 32);
             this.screen.Name = "screen";
             this.screen.Size = new System.Drawing.Size(611, 445);
             this.screen.TabIndex = 1;
             this.screen.TabStop = false;
             // 
-            // button1
+            // serverButton
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(133, 32);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 36);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Start Server";
-            this.button1.UseVisualStyleBackColor = true;
+            this.serverButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.serverButton.Location = new System.Drawing.Point(133, 32);
+            this.serverButton.Name = "serverButton";
+            this.serverButton.Size = new System.Drawing.Size(90, 36);
+            this.serverButton.TabIndex = 3;
+            this.serverButton.Text = "Start Server";
+            this.serverButton.UseVisualStyleBackColor = true;
+            this.serverButton.Click += new System.EventHandler(this.serverButton_Click);
             // 
             // clientGroupBox
             // 
-            this.clientGroupBox.Controls.Add(this.serverGroupBox);
-            this.clientGroupBox.Controls.Add(this.label1);
-            this.clientGroupBox.Controls.Add(this.textBox1);
+            this.clientGroupBox.Controls.Add(this.ipAddress);
+            this.clientGroupBox.Controls.Add(this.ipTextBox);
             this.clientGroupBox.Controls.Add(this.startClient);
             this.clientGroupBox.Location = new System.Drawing.Point(12, 105);
             this.clientGroupBox.Name = "clientGroupBox";
@@ -87,15 +90,45 @@
             // 
             // serverGroupBox
             // 
+            this.serverGroupBox.Controls.Add(this.monitorList);
+            this.serverGroupBox.Controls.Add(this.sharingLink);
+            this.serverGroupBox.Controls.Add(this.screenLabel);
             this.serverGroupBox.Controls.Add(this.stopServer);
-            this.serverGroupBox.Controls.Add(this.label2);
-            this.serverGroupBox.Controls.Add(this.textBox2);
+            this.serverGroupBox.Controls.Add(this.connectingLink);
             this.serverGroupBox.Controls.Add(this.startServer);
-            this.serverGroupBox.Location = new System.Drawing.Point(0, 10);
+            this.serverGroupBox.Location = new System.Drawing.Point(12, 105);
             this.serverGroupBox.Name = "serverGroupBox";
             this.serverGroupBox.Size = new System.Drawing.Size(211, 341);
             this.serverGroupBox.TabIndex = 5;
             this.serverGroupBox.TabStop = false;
+            // 
+            // monitorList
+            // 
+            this.monitorList.FormattingEnabled = true;
+            this.monitorList.Location = new System.Drawing.Point(21, 125);
+            this.monitorList.Name = "monitorList";
+            this.monitorList.Size = new System.Drawing.Size(121, 21);
+            this.monitorList.TabIndex = 6;
+            // 
+            // sharingLink
+            // 
+            this.sharingLink.AutoSize = true;
+            this.sharingLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sharingLink.Location = new System.Drawing.Point(18, 57);
+            this.sharingLink.Name = "sharingLink";
+            this.sharingLink.Size = new System.Drawing.Size(93, 16);
+            this.sharingLink.TabIndex = 5;
+            this.sharingLink.Text = "ex: 192.168.1.1";
+            // 
+            // screenLabel
+            // 
+            this.screenLabel.AutoSize = true;
+            this.screenLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.screenLabel.Location = new System.Drawing.Point(19, 95);
+            this.screenLabel.Name = "screenLabel";
+            this.screenLabel.Size = new System.Drawing.Size(51, 16);
+            this.screenLabel.TabIndex = 4;
+            this.screenLabel.Text = "Screen";
             // 
             // stopServer
             // 
@@ -107,22 +140,15 @@
             this.stopServer.Text = "Stop";
             this.stopServer.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // connectingLink
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(18, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 16);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Connecting Link";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(75, 22);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 1;
+            this.connectingLink.AutoSize = true;
+            this.connectingLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.connectingLink.Location = new System.Drawing.Point(18, 23);
+            this.connectingLink.Name = "connectingLink";
+            this.connectingLink.Size = new System.Drawing.Size(102, 16);
+            this.connectingLink.TabIndex = 2;
+            this.connectingLink.Text = "Connecting Link";
             // 
             // startServer
             // 
@@ -133,23 +159,24 @@
             this.startServer.TabIndex = 0;
             this.startServer.Text = "Start";
             this.startServer.UseVisualStyleBackColor = true;
+            this.startServer.Click += new System.EventHandler(this.startServer_Click);
             // 
-            // label1
+            // ipAddress
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 16);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "IP Address";
+            this.ipAddress.AutoSize = true;
+            this.ipAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ipAddress.Location = new System.Drawing.Point(7, 20);
+            this.ipAddress.Name = "ipAddress";
+            this.ipAddress.Size = new System.Drawing.Size(74, 16);
+            this.ipAddress.TabIndex = 2;
+            this.ipAddress.Text = "IP Address";
             // 
-            // textBox1
+            // ipTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(87, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
+            this.ipTextBox.Location = new System.Drawing.Point(87, 19);
+            this.ipTextBox.Name = "ipTextBox";
+            this.ipTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ipTextBox.TabIndex = 1;
             // 
             // startClient
             // 
@@ -159,14 +186,16 @@
             this.startClient.TabIndex = 0;
             this.startClient.Text = "Start Connection";
             this.startClient.UseVisualStyleBackColor = true;
+            this.startClient.Click += new System.EventHandler(this.startClient_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(891, 516);
+            this.Controls.Add(this.serverGroupBox);
             this.Controls.Add(this.clientGroupBox);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.serverButton);
             this.Controls.Add(this.screen);
             this.Controls.Add(this.clientButton);
             this.Name = "Form1";
@@ -184,16 +213,18 @@
 
         private System.Windows.Forms.Button clientButton;
         private System.Windows.Forms.PictureBox screen;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button serverButton;
         private System.Windows.Forms.GroupBox clientGroupBox;
         private System.Windows.Forms.GroupBox serverGroupBox;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label connectingLink;
         private System.Windows.Forms.Button startServer;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label ipAddress;
+        private System.Windows.Forms.TextBox ipTextBox;
         private System.Windows.Forms.Button startClient;
         private System.Windows.Forms.Button stopServer;
+        private System.Windows.Forms.Label sharingLink;
+        private System.Windows.Forms.Label screenLabel;
+        private System.Windows.Forms.ComboBox monitorList;
     }
 }
 
