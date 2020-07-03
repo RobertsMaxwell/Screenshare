@@ -18,6 +18,7 @@ namespace Screenshare
         public static int PORT = 49152;
         public string address;
         public PictureBox display;
+        public TcpClient connection;
 
         public Client(string address, PictureBox display)
         {
@@ -29,7 +30,7 @@ namespace Screenshare
         {
             try
             {
-                var connection = new TcpClient();
+                connection = new TcpClient();
                 var result = connection.BeginConnect(IPAddress.Parse(address), PORT, null, connection);
 
                 if (result.AsyncWaitHandle.WaitOne(1000))
@@ -52,12 +53,21 @@ namespace Screenshare
                         }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Cannot find server", "Error", MessageBoxButtons.OK);
+                }
                 Thread.CurrentThread.Abort();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK);
             }
+        }
+
+        public void Disconnect()
+        {
+            connection.Close();
         }
     }
 }

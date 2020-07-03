@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Net;
 using System.Net.Sockets;
+using NetFwTypeLib;
 
 namespace Screenshare
 {
@@ -17,6 +18,8 @@ namespace Screenshare
     {
         public List<Thread> threadList = new List<Thread>();
         Server server;
+        Client client;
+        string externalIP;
         bool active = false;
 
         public Form()
@@ -24,10 +27,19 @@ namespace Screenshare
             InitializeComponent();
 
             serverGroupBox.Visible = false;
-            clientGroupBox.Visible = false;
-            string externalip = new WebClient().DownloadString("http://icanhazip.com");
-            Console.WriteLine(externalip);
-            sharingLink.Text = externalip;
+            clientGroupBox.Visible = true;
+            clientGroupBox.BringToFront();
+
+            try
+            {
+                externalIP = new WebClient().DownloadString("http://icanhazip.com");
+            }
+            catch
+            {
+                externalIP = "Error";
+            }
+            sharingLink.Text = GetLocalAddress();
+            publicAddress.Text = externalIP;
         }
 
         private void serverButton_Click(object sender, EventArgs e)
@@ -65,7 +77,7 @@ namespace Screenshare
 
         private void startClient_Click(object sender, EventArgs e)
         {
-            Client client = new Client(ipTextBox.Text.Trim(), screen);
+            client = new Client(ipTextBox.Text.Trim(), screen);
             Thread thread = new Thread(new ThreadStart(client.InitiateTCPConnect));
             thread.Start();
             threadList.Add(thread);
@@ -78,7 +90,7 @@ namespace Screenshare
             {
                 thread.Abort();
             }
-            Console.WriteLine("Cancels");
+            MessageBox.Show("All threads closed.", "Success", MessageBoxButtons.OK);
             threadList = new List<Thread>();
             active = false;
         }
@@ -97,9 +109,46 @@ namespace Screenshare
             return "Error";
         }
 
+        
+
+        private void firewallRule_Click(object sender, EventArgs e)
+        {
+            INetFwPolicy2 policy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
+            INetFwRule rule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwRule"));
+            
+            try
+            {
+                rule.Name = "Dynamic Firewall Creation";
+                rule.Protocol = (int)ProtocolType.Tcp;
+                rule.LocalPorts = Server.PORT.ToString();
+                rule.Enabled = true;
+                policy.Rules.Add(rule);
+                MessageBox.Show("Succesfuly created Firewall Rule", "Success", MessageBoxButtons.OK);
+            }
+            catch(Exception err)
+            {
+                MessageBox.Show($"Couldn't create new Firewall rule\nError Message: {err.Message}", "Error", MessageBoxButtons.OK);
+            }
+            
+        }
+
+
         private void copyButton_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(GetLocalAddress());
+        }
+
+        private void publicAddressCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(externalIP);
+        }
+
+        private void clientDisconnect_Click(object sender, EventArgs e)
+        {
+            if (client != null)
+            {
+                client.Disconnect();
+            }
         }
     }
 }

@@ -29,21 +29,30 @@
         private void InitializeComponent()
         {
             this.clientButton = new System.Windows.Forms.Button();
-            this.screen = new System.Windows.Forms.PictureBox();
             this.serverButton = new System.Windows.Forms.Button();
             this.clientGroupBox = new System.Windows.Forms.GroupBox();
             this.ipAddress = new System.Windows.Forms.Label();
             this.ipTextBox = new System.Windows.Forms.TextBox();
             this.startClient = new System.Windows.Forms.Button();
             this.serverGroupBox = new System.Windows.Forms.GroupBox();
+            this.copyButton = new System.Windows.Forms.Button();
             this.sharingLink = new System.Windows.Forms.Label();
             this.stopServer = new System.Windows.Forms.Button();
             this.connectingLink = new System.Windows.Forms.Label();
             this.startServer = new System.Windows.Forms.Button();
-            this.copyButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.screen)).BeginInit();
+            this.label1 = new System.Windows.Forms.Label();
+            this.firewallRule = new System.Windows.Forms.Button();
+            this.publicAddressCopy = new System.Windows.Forms.Button();
+            this.publicAddress = new System.Windows.Forms.Label();
+            this.clientDisconnect = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.screen = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.clientGroupBox.SuspendLayout();
             this.serverGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.screen)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // clientButton
@@ -57,15 +66,6 @@
             this.clientButton.Text = "Client";
             this.clientButton.UseVisualStyleBackColor = true;
             this.clientButton.Click += new System.EventHandler(this.clientButton_Click);
-            // 
-            // screen
-            // 
-            this.screen.Location = new System.Drawing.Point(255, 12);
-            this.screen.Name = "screen";
-            this.screen.Size = new System.Drawing.Size(976, 582);
-            this.screen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.screen.TabIndex = 1;
-            this.screen.TabStop = false;
             // 
             // serverButton
             // 
@@ -83,6 +83,7 @@
             // 
             this.clientGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.clientGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.clientGroupBox.Controls.Add(this.clientDisconnect);
             this.clientGroupBox.Controls.Add(this.ipAddress);
             this.clientGroupBox.Controls.Add(this.ipTextBox);
             this.clientGroupBox.Controls.Add(this.startClient);
@@ -111,7 +112,7 @@
             // startClient
             // 
             this.startClient.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.startClient.Location = new System.Drawing.Point(64, 450);
+            this.startClient.Location = new System.Drawing.Point(25, 450);
             this.startClient.Name = "startClient";
             this.startClient.Size = new System.Drawing.Size(85, 35);
             this.startClient.TabIndex = 0;
@@ -123,6 +124,12 @@
             // 
             this.serverGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.serverGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.serverGroupBox.Controls.Add(this.label3);
+            this.serverGroupBox.Controls.Add(this.label2);
+            this.serverGroupBox.Controls.Add(this.publicAddressCopy);
+            this.serverGroupBox.Controls.Add(this.publicAddress);
+            this.serverGroupBox.Controls.Add(this.firewallRule);
+            this.serverGroupBox.Controls.Add(this.label1);
             this.serverGroupBox.Controls.Add(this.copyButton);
             this.serverGroupBox.Controls.Add(this.sharingLink);
             this.serverGroupBox.Controls.Add(this.stopServer);
@@ -134,12 +141,22 @@
             this.serverGroupBox.TabIndex = 5;
             this.serverGroupBox.TabStop = false;
             // 
+            // copyButton
+            // 
+            this.copyButton.Location = new System.Drawing.Point(133, 63);
+            this.copyButton.Name = "copyButton";
+            this.copyButton.Size = new System.Drawing.Size(57, 23);
+            this.copyButton.TabIndex = 6;
+            this.copyButton.Text = "Copy";
+            this.copyButton.UseVisualStyleBackColor = true;
+            this.copyButton.Click += new System.EventHandler(this.copyButton_Click);
+            // 
             // sharingLink
             // 
             this.sharingLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sharingLink.Location = new System.Drawing.Point(6, 42);
+            this.sharingLink.Location = new System.Drawing.Point(31, 61);
             this.sharingLink.Name = "sharingLink";
-            this.sharingLink.Size = new System.Drawing.Size(132, 26);
+            this.sharingLink.Size = new System.Drawing.Size(96, 26);
             this.sharingLink.TabIndex = 5;
             this.sharingLink.Text = "0";
             this.sharingLink.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -178,33 +195,110 @@
             this.startServer.UseVisualStyleBackColor = true;
             this.startServer.Click += new System.EventHandler(this.startServer_Click);
             // 
-            // copyButton
+            // label1
             // 
-            this.copyButton.Location = new System.Drawing.Point(144, 45);
-            this.copyButton.Name = "copyButton";
-            this.copyButton.Size = new System.Drawing.Size(57, 23);
-            this.copyButton.TabIndex = 6;
-            this.copyButton.Text = "Copy";
-            this.copyButton.UseVisualStyleBackColor = true;
-            this.copyButton.Click += new System.EventHandler(this.copyButton_Click);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 164);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(104, 16);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Firewall Rule:";
+            // 
+            // firewallRule
+            // 
+            this.firewallRule.Location = new System.Drawing.Point(106, 161);
+            this.firewallRule.Name = "firewallRule";
+            this.firewallRule.Size = new System.Drawing.Size(85, 23);
+            this.firewallRule.TabIndex = 7;
+            this.firewallRule.Text = "Create Rule";
+            this.firewallRule.UseVisualStyleBackColor = true;
+            this.firewallRule.Click += new System.EventHandler(this.firewallRule_Click);
+            // 
+            // publicAddressCopy
+            // 
+            this.publicAddressCopy.Location = new System.Drawing.Point(133, 112);
+            this.publicAddressCopy.Name = "publicAddressCopy";
+            this.publicAddressCopy.Size = new System.Drawing.Size(57, 23);
+            this.publicAddressCopy.TabIndex = 9;
+            this.publicAddressCopy.Text = "Copy";
+            this.publicAddressCopy.UseVisualStyleBackColor = true;
+            this.publicAddressCopy.Click += new System.EventHandler(this.publicAddressCopy_Click);
+            // 
+            // publicAddress
+            // 
+            this.publicAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.publicAddress.Location = new System.Drawing.Point(34, 109);
+            this.publicAddress.Name = "publicAddress";
+            this.publicAddress.Size = new System.Drawing.Size(93, 26);
+            this.publicAddress.TabIndex = 8;
+            this.publicAddress.Text = "0";
+            this.publicAddress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // clientDisconnect
+            // 
+            this.clientDisconnect.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.clientDisconnect.Location = new System.Drawing.Point(117, 450);
+            this.clientDisconnect.Name = "clientDisconnect";
+            this.clientDisconnect.Size = new System.Drawing.Size(85, 35);
+            this.clientDisconnect.TabIndex = 3;
+            this.clientDisconnect.Text = "Disconnect";
+            this.clientDisconnect.UseVisualStyleBackColor = true;
+            this.clientDisconnect.Click += new System.EventHandler(this.clientDisconnect_Click);
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(9, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 16);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Local:";
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(9, 93);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 16);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Public:";
+            // 
+            // screen
+            // 
+            this.screen.Location = new System.Drawing.Point(17, 14);
+            this.screen.Name = "screen";
+            this.screen.Size = new System.Drawing.Size(976, 582);
+            this.screen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.screen.TabIndex = 1;
+            this.screen.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.screen);
+            this.panel1.Location = new System.Drawing.Point(238, -2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1005, 608);
+            this.panel1.TabIndex = 12;
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1243, 606);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.serverGroupBox);
             this.Controls.Add(this.clientGroupBox);
             this.Controls.Add(this.serverButton);
-            this.Controls.Add(this.screen);
             this.Controls.Add(this.clientButton);
             this.Name = "Form";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.screen)).EndInit();
             this.clientGroupBox.ResumeLayout(false);
             this.clientGroupBox.PerformLayout();
             this.serverGroupBox.ResumeLayout(false);
             this.serverGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.screen)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -222,8 +316,16 @@
         private System.Windows.Forms.Button startClient;
         private System.Windows.Forms.Button stopServer;
         private System.Windows.Forms.Label sharingLink;
-        public System.Windows.Forms.PictureBox screen;
         private System.Windows.Forms.Button copyButton;
+        private System.Windows.Forms.Button firewallRule;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button publicAddressCopy;
+        private System.Windows.Forms.Label publicAddress;
+        private System.Windows.Forms.Button clientDisconnect;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.PictureBox screen;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
