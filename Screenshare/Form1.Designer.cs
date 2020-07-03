@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
             this.clientButton = new System.Windows.Forms.Button();
             this.serverButton = new System.Windows.Forms.Button();
             this.clientGroupBox = new System.Windows.Forms.GroupBox();
@@ -36,6 +37,7 @@
             this.ipTextBox = new System.Windows.Forms.TextBox();
             this.startClient = new System.Windows.Forms.Button();
             this.serverGroupBox = new System.Windows.Forms.GroupBox();
+            this.status = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.publicAddressCopy = new System.Windows.Forms.Button();
@@ -49,7 +51,6 @@
             this.startServer = new System.Windows.Forms.Button();
             this.screen = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.status = new System.Windows.Forms.Label();
             this.clientGroupBox.SuspendLayout();
             this.serverGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.screen)).BeginInit();
@@ -153,6 +154,16 @@
             this.serverGroupBox.Size = new System.Drawing.Size(220, 520);
             this.serverGroupBox.TabIndex = 5;
             this.serverGroupBox.TabStop = false;
+            // 
+            // status
+            // 
+            this.status.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.status.Location = new System.Drawing.Point(23, 431);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(178, 16);
+            this.status.TabIndex = 12;
+            this.status.Text = "Status:";
+            this.status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -283,16 +294,6 @@
             this.panel1.Size = new System.Drawing.Size(1005, 608);
             this.panel1.TabIndex = 12;
             // 
-            // status
-            // 
-            this.status.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.status.Location = new System.Drawing.Point(23, 431);
-            this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(178, 16);
-            this.status.TabIndex = 12;
-            this.status.Text = "Status:";
-            this.status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,8 +304,12 @@
             this.Controls.Add(this.clientGroupBox);
             this.Controls.Add(this.serverButton);
             this.Controls.Add(this.clientButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Screenshare";
             this.clientGroupBox.ResumeLayout(false);
             this.clientGroupBox.PerformLayout();
             this.serverGroupBox.ResumeLayout(false);

@@ -92,7 +92,6 @@ namespace Screenshare
             {
                 thread.Abort();
             }
-            MessageBox.Show("All threads closed.", "Success", MessageBoxButtons.OK);
             threadList = new List<Thread>();
             active = false;
         }

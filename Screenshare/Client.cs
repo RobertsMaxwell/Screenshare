@@ -62,7 +62,9 @@ namespace Screenshare
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK);
+                display.Image = null;
+                MessageBox.Show("Disconnected", "Information", MessageBoxButtons.OK);
+                Thread.CurrentThread.Abort();
             }
         }
 
