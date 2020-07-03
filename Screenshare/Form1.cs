@@ -18,7 +18,7 @@ namespace Screenshare
     {
         public List<Thread> threadList = new List<Thread>();
         Server server;
-        Client client;
+        //Client client;
         string externalIP;
         bool active = false;
 
@@ -77,7 +77,7 @@ namespace Screenshare
 
         private void startClient_Click(object sender, EventArgs e)
         {
-            client = new Client(ipTextBox.Text.Trim(), screen);
+            Client client = new Client(ipTextBox.Text.Trim(), screen);
             Thread thread = new Thread(new ThreadStart(client.InitiateTCPConnect));
             thread.Start();
             threadList.Add(thread);
@@ -143,12 +143,12 @@ namespace Screenshare
             Clipboard.SetText(externalIP);
         }
 
-        private void clientDisconnect_Click(object sender, EventArgs e)
+       /* private void clientDisconnect_Click(object sender, EventArgs e)
         {
             if (client != null)
             {
                 client.Disconnect();
             }
-        }
+        }*/
     }
 }
