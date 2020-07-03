@@ -32,6 +32,8 @@ namespace Screenshare
             {
                 connection = new TcpClient();
                 var result = connection.BeginConnect(IPAddress.Parse(address), PORT, null, connection);
+                Console.WriteLine(address);
+                Console.WriteLine(PORT);
 
                 if (result.AsyncWaitHandle.WaitOne(1000))
                 {
