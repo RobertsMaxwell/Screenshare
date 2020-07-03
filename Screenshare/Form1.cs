@@ -40,6 +40,8 @@ namespace Screenshare
             }
             sharingLink.Text = GetLocalAddress();
             publicAddress.Text = externalIP;
+
+            status.Text = "Status: Down";
         }
 
         private void serverButton_Click(object sender, EventArgs e)
@@ -67,7 +69,7 @@ namespace Screenshare
         {
             if (!active)
             {
-                server = new Server(screen);
+                server = new Server(screen, status);
                 Thread thread = new Thread(new ThreadStart(server.StartTCPListener));
                 thread.Start();
                 threadList.Add(thread);

@@ -16,12 +16,14 @@ namespace Screenshare
     class Server
     {
         public PictureBox display;
+        public Label status;
         public int framesPerSecond;
         TcpListener server = null;
 
-        public Server(PictureBox display, int fps = 30)
+        public Server(PictureBox display, Label statusLabel, int fps = 30)
         {
             this.display = display;
+            status = statusLabel;
             framesPerSecond = fps;
         }
 
@@ -34,16 +36,17 @@ namespace Screenshare
             //create/start server
             server = new TcpListener(PORT);
             server.Start();
-            Console.WriteLine("Listening...");
+            status.Text = "Status: Listening...";
             try
             {
                 client = server.AcceptTcpClient();
+                status.Text = "Status: Connecting...";
             }
             catch
             {
                 return;
             }
-            Console.WriteLine("Connected!");
+            status.Text = "Status: Connected!";
 
             while (true)
             {
@@ -57,7 +60,10 @@ namespace Screenshare
                     Thread.Sleep(1000 / framesPerSecond);
                 } catch(Exception e)
                 {
-                    Console.WriteLine($"Error Message: {e.Message}");
+                    status.Text = "Status: Down";
+                    display.Image = null;
+                    MessageBox.Show("Disconnected", "Information", MessageBoxButtons.OK);
+                    return;
                 }
             }
         }
@@ -66,6 +72,7 @@ namespace Screenshare
         {
             if (server != null)
             {
+                status.Text = "Status: Down";
                 server.Stop();
             }
         }

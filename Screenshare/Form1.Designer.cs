@@ -31,24 +31,25 @@
             this.clientButton = new System.Windows.Forms.Button();
             this.serverButton = new System.Windows.Forms.Button();
             this.clientGroupBox = new System.Windows.Forms.GroupBox();
+            this.clientDisconnect = new System.Windows.Forms.Button();
             this.ipAddress = new System.Windows.Forms.Label();
             this.ipTextBox = new System.Windows.Forms.TextBox();
             this.startClient = new System.Windows.Forms.Button();
             this.serverGroupBox = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.publicAddressCopy = new System.Windows.Forms.Button();
+            this.publicAddress = new System.Windows.Forms.Label();
+            this.firewallRule = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.copyButton = new System.Windows.Forms.Button();
             this.sharingLink = new System.Windows.Forms.Label();
             this.stopServer = new System.Windows.Forms.Button();
             this.connectingLink = new System.Windows.Forms.Label();
             this.startServer = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.firewallRule = new System.Windows.Forms.Button();
-            this.publicAddressCopy = new System.Windows.Forms.Button();
-            this.publicAddress = new System.Windows.Forms.Label();
-            this.clientDisconnect = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.screen = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.status = new System.Windows.Forms.Label();
             this.clientGroupBox.SuspendLayout();
             this.serverGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.screen)).BeginInit();
@@ -93,6 +94,17 @@
             this.clientGroupBox.TabIndex = 4;
             this.clientGroupBox.TabStop = false;
             // 
+            // clientDisconnect
+            // 
+            this.clientDisconnect.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.clientDisconnect.Location = new System.Drawing.Point(117, 450);
+            this.clientDisconnect.Name = "clientDisconnect";
+            this.clientDisconnect.Size = new System.Drawing.Size(85, 35);
+            this.clientDisconnect.TabIndex = 3;
+            this.clientDisconnect.Text = "Disconnect";
+            this.clientDisconnect.UseVisualStyleBackColor = true;
+            this.clientDisconnect.Click += new System.EventHandler(this.clientDisconnect_Click);
+            // 
             // ipAddress
             // 
             this.ipAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -124,6 +136,7 @@
             // 
             this.serverGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.serverGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.serverGroupBox.Controls.Add(this.status);
             this.serverGroupBox.Controls.Add(this.label3);
             this.serverGroupBox.Controls.Add(this.label2);
             this.serverGroupBox.Controls.Add(this.publicAddressCopy);
@@ -140,6 +153,63 @@
             this.serverGroupBox.Size = new System.Drawing.Size(220, 520);
             this.serverGroupBox.TabIndex = 5;
             this.serverGroupBox.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(9, 93);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 16);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Public:";
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(9, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 16);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Local:";
+            // 
+            // publicAddressCopy
+            // 
+            this.publicAddressCopy.Location = new System.Drawing.Point(133, 112);
+            this.publicAddressCopy.Name = "publicAddressCopy";
+            this.publicAddressCopy.Size = new System.Drawing.Size(57, 23);
+            this.publicAddressCopy.TabIndex = 9;
+            this.publicAddressCopy.Text = "Copy";
+            this.publicAddressCopy.UseVisualStyleBackColor = true;
+            this.publicAddressCopy.Click += new System.EventHandler(this.publicAddressCopy_Click);
+            // 
+            // publicAddress
+            // 
+            this.publicAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.publicAddress.Location = new System.Drawing.Point(34, 109);
+            this.publicAddress.Name = "publicAddress";
+            this.publicAddress.Size = new System.Drawing.Size(93, 26);
+            this.publicAddress.TabIndex = 8;
+            this.publicAddress.Text = "0";
+            this.publicAddress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // firewallRule
+            // 
+            this.firewallRule.Location = new System.Drawing.Point(106, 161);
+            this.firewallRule.Name = "firewallRule";
+            this.firewallRule.Size = new System.Drawing.Size(85, 23);
+            this.firewallRule.TabIndex = 7;
+            this.firewallRule.Text = "Create Rule";
+            this.firewallRule.UseVisualStyleBackColor = true;
+            this.firewallRule.Click += new System.EventHandler(this.firewallRule_Click);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 164);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(104, 16);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Firewall Rule:";
             // 
             // copyButton
             // 
@@ -195,74 +265,6 @@
             this.startServer.UseVisualStyleBackColor = true;
             this.startServer.Click += new System.EventHandler(this.startServer_Click);
             // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 164);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 16);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Firewall Rule:";
-            // 
-            // firewallRule
-            // 
-            this.firewallRule.Location = new System.Drawing.Point(106, 161);
-            this.firewallRule.Name = "firewallRule";
-            this.firewallRule.Size = new System.Drawing.Size(85, 23);
-            this.firewallRule.TabIndex = 7;
-            this.firewallRule.Text = "Create Rule";
-            this.firewallRule.UseVisualStyleBackColor = true;
-            this.firewallRule.Click += new System.EventHandler(this.firewallRule_Click);
-            // 
-            // publicAddressCopy
-            // 
-            this.publicAddressCopy.Location = new System.Drawing.Point(133, 112);
-            this.publicAddressCopy.Name = "publicAddressCopy";
-            this.publicAddressCopy.Size = new System.Drawing.Size(57, 23);
-            this.publicAddressCopy.TabIndex = 9;
-            this.publicAddressCopy.Text = "Copy";
-            this.publicAddressCopy.UseVisualStyleBackColor = true;
-            this.publicAddressCopy.Click += new System.EventHandler(this.publicAddressCopy_Click);
-            // 
-            // publicAddress
-            // 
-            this.publicAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.publicAddress.Location = new System.Drawing.Point(34, 109);
-            this.publicAddress.Name = "publicAddress";
-            this.publicAddress.Size = new System.Drawing.Size(93, 26);
-            this.publicAddress.TabIndex = 8;
-            this.publicAddress.Text = "0";
-            this.publicAddress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // clientDisconnect
-            // 
-            this.clientDisconnect.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.clientDisconnect.Location = new System.Drawing.Point(117, 450);
-            this.clientDisconnect.Name = "clientDisconnect";
-            this.clientDisconnect.Size = new System.Drawing.Size(85, 35);
-            this.clientDisconnect.TabIndex = 3;
-            this.clientDisconnect.Text = "Disconnect";
-            this.clientDisconnect.UseVisualStyleBackColor = true;
-            this.clientDisconnect.Click += new System.EventHandler(this.clientDisconnect_Click);
-            // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 16);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Local:";
-            // 
-            // label3
-            // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(9, 93);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 16);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Public:";
-            // 
             // screen
             // 
             this.screen.Location = new System.Drawing.Point(17, 14);
@@ -280,6 +282,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1005, 608);
             this.panel1.TabIndex = 12;
+            // 
+            // status
+            // 
+            this.status.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.status.Location = new System.Drawing.Point(23, 431);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(178, 16);
+            this.status.TabIndex = 12;
+            this.status.Text = "Status:";
+            this.status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form
             // 
@@ -326,6 +338,7 @@
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.PictureBox screen;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label status;
     }
 }
 
