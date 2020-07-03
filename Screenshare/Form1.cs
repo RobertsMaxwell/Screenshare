@@ -119,8 +119,10 @@ namespace Screenshare
             try
             {
                 rule.Name = "Dynamic Firewall Creation";
+                rule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN;
                 rule.Protocol = (int)ProtocolType.Tcp;
                 rule.LocalPorts = Server.PORT.ToString();
+                rule.Action = NET_FW_ACTION_.NET_FW_ACTION_ALLOW;
                 rule.Enabled = true;
                 policy.Rules.Add(rule);
                 MessageBox.Show("Succesfuly created Firewall Rule", "Success", MessageBoxButtons.OK);
