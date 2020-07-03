@@ -25,7 +25,9 @@ namespace Screenshare
 
             serverGroupBox.Visible = false;
             clientGroupBox.Visible = false;
-            sharingLink.Text = GetLocalAddress();
+            string externalip = new WebClient().DownloadString("http://icanhazip.com");
+            Console.WriteLine(externalip);
+            sharingLink.Text = externalip;//GetLocalAddress();
         }
 
         private void serverButton_Click(object sender, EventArgs e)
