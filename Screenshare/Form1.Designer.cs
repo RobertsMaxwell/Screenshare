@@ -243,7 +243,7 @@
             this.clientDisconnect.TabIndex = 3;
             this.clientDisconnect.Text = "Disconnect";
             this.clientDisconnect.UseVisualStyleBackColor = true;
-            //this.clientDisconnect.Click += new System.EventHandler(this.clientDisconnect_Click);
+            this.clientDisconnect.Click += new System.EventHandler(this.clientDisconnect_Click);
             // 
             // label2
             // 
