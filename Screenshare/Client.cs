@@ -57,7 +57,6 @@ namespace Screenshare
                 {
                     MessageBox.Show("Cannot find server", "Error", MessageBoxButtons.OK);
                 }
-                Console.WriteLine("ABorted");
                 Thread.CurrentThread.Abort();
             }
             catch (Exception e)
