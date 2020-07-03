@@ -36,11 +36,13 @@
             this.ipTextBox = new System.Windows.Forms.TextBox();
             this.startClient = new System.Windows.Forms.Button();
             this.serverGroupBox = new System.Windows.Forms.GroupBox();
+            this.copyButton = new System.Windows.Forms.Button();
             this.sharingLink = new System.Windows.Forms.Label();
             this.stopServer = new System.Windows.Forms.Button();
             this.connectingLink = new System.Windows.Forms.Label();
             this.startServer = new System.Windows.Forms.Button();
-            this.copyButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.firewallRule = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.screen)).BeginInit();
             this.clientGroupBox.SuspendLayout();
             this.serverGroupBox.SuspendLayout();
@@ -123,16 +125,28 @@
             // 
             this.serverGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.serverGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.serverGroupBox.Controls.Add(this.firewallRule);
+            this.serverGroupBox.Controls.Add(this.label1);
             this.serverGroupBox.Controls.Add(this.copyButton);
             this.serverGroupBox.Controls.Add(this.sharingLink);
             this.serverGroupBox.Controls.Add(this.stopServer);
             this.serverGroupBox.Controls.Add(this.connectingLink);
             this.serverGroupBox.Controls.Add(this.startServer);
-            this.serverGroupBox.Location = new System.Drawing.Point(12, 74);
+            this.serverGroupBox.Location = new System.Drawing.Point(270, 74);
             this.serverGroupBox.Name = "serverGroupBox";
             this.serverGroupBox.Size = new System.Drawing.Size(220, 520);
             this.serverGroupBox.TabIndex = 5;
             this.serverGroupBox.TabStop = false;
+            // 
+            // copyButton
+            // 
+            this.copyButton.Location = new System.Drawing.Point(144, 45);
+            this.copyButton.Name = "copyButton";
+            this.copyButton.Size = new System.Drawing.Size(57, 23);
+            this.copyButton.TabIndex = 6;
+            this.copyButton.Text = "Copy";
+            this.copyButton.UseVisualStyleBackColor = true;
+            this.copyButton.Click += new System.EventHandler(this.copyButton_Click);
             // 
             // sharingLink
             // 
@@ -178,15 +192,24 @@
             this.startServer.UseVisualStyleBackColor = true;
             this.startServer.Click += new System.EventHandler(this.startServer_Click);
             // 
-            // copyButton
+            // label1
             // 
-            this.copyButton.Location = new System.Drawing.Point(144, 45);
-            this.copyButton.Name = "copyButton";
-            this.copyButton.Size = new System.Drawing.Size(57, 23);
-            this.copyButton.TabIndex = 6;
-            this.copyButton.Text = "Copy";
-            this.copyButton.UseVisualStyleBackColor = true;
-            this.copyButton.Click += new System.EventHandler(this.copyButton_Click);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 164);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(104, 16);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Firewall Rule:";
+            // 
+            // firewallRule
+            // 
+            this.firewallRule.Location = new System.Drawing.Point(106, 161);
+            this.firewallRule.Name = "firewallRule";
+            this.firewallRule.Size = new System.Drawing.Size(85, 23);
+            this.firewallRule.TabIndex = 7;
+            this.firewallRule.Text = "Create Rule";
+            this.firewallRule.UseVisualStyleBackColor = true;
+            this.firewallRule.Click += new System.EventHandler(this.firewallRule_Click);
             // 
             // Form
             // 
@@ -224,6 +247,8 @@
         private System.Windows.Forms.Label sharingLink;
         public System.Windows.Forms.PictureBox screen;
         private System.Windows.Forms.Button copyButton;
+        private System.Windows.Forms.Button firewallRule;
+        private System.Windows.Forms.Label label1;
     }
 }
 

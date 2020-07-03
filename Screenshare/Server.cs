@@ -27,7 +27,7 @@ namespace Screenshare
 
         static TcpClient client;
         static Screen displayScreen = Screen.PrimaryScreen;
-        static int PORT = 49152;
+        public static int PORT = 49152;
 
         public void StartTCPListener()
         {

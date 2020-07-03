@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Net;
 using System.Net.Sockets;
+using NetFwTypeLib;
 
 namespace Screenshare
 {
@@ -76,7 +77,7 @@ namespace Screenshare
             {
                 thread.Abort();
             }
-            Console.WriteLine("Cancels");
+            MessageBox.Show("All threads closed.", "Success", MessageBoxButtons.OK);
             threadList = new List<Thread>();
             active = false;
         }
@@ -98,6 +99,27 @@ namespace Screenshare
         private void copyButton_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(GetLocalAddress());
+        }
+
+        private void firewallRule_Click(object sender, EventArgs e)
+        {
+            INetFwPolicy2 policy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
+            INetFwRule rule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwRule"));
+            
+            try
+            {
+                rule.Name = "Dynamic Firewall Creation";
+                rule.Protocol = (int)ProtocolType.Tcp;
+                rule.LocalPorts = Server.PORT.ToString();
+                rule.Enabled = true;
+                policy.Rules.Add(rule);
+                MessageBox.Show("Succesfuly created Firewall Rule", "Success", MessageBoxButtons.OK);
+            }
+            catch(Exception err)
+            {
+                MessageBox.Show($"Couldn't create new Firewall rule\nError Message: {err.Message}", "Error", MessageBoxButtons.OK);
+            }
+            
         }
     }
 }
